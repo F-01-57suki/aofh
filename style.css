@@ -1,0 +1,248 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+/* https://fonts.google.com/specimen/New+Tegomin?subset=japanese#standard-styles */
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+共通処理
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+/*-* 余白リセット *-*-*-*-*-*-*-*-*-*-*-*/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*-* 初期設定 *-*-*-*-*-*-*-*-*-*-*-*/
+html{
+  font-size: 62.5%;
+  font-family: 'New Tegomin', serif;
+}
+
+body{
+  font-size: 1.6rem;
+  background-color: rgb(0, 0, 0);
+}
+body::before{
+  background: url(images/background.jpg) no-repeat center;
+  background-size: cover;
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+}
+
+a{
+  color: rgb(102, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover{
+  color: rgb(153, 51, 51);
+}
+
+img{
+  border: 0;
+  vertical-align: top;
+}
+
+ul{
+  list-style: none;
+}
+
+/*-* 行間 *-*-*-*-*-*-*-*-*-*-*-*/
+h1{
+  line-height:1;
+}
+
+/*-* 中央揃え *-*-*-*-*-*-*-*-*-*-*-*/
+#wrapper{
+  margin:0 auto;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/*-* IE対策 *-*-*-*-*-*-*-*-*-*-*-*/
+main{
+  display: block;
+}
+
+/*-* footer(共通) *-*-*-*-*-*-*-*-*-*-*-*/
+footer{
+  margin-top: 50px;
+  text-align: center;
+}
+/*-* #error *-*-*-*-*-*-*-*-*-*-*-*/
+#error main>h1,#error main>p{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+/*-* #login *-*-*-*-*-*-*-*-*-*-*-*/
+#login h1{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+#login main>div{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#login tr{
+  display: flex;
+  justify-content: center;
+}
+
+#login table>tbody>tr:last-child{
+  text-align: center;
+}
+#loginbtn{
+  margin-top: 30px;
+  width: 80%;
+}
+
+/*-* index *-*-*-*-*-*-*-*-*-*-*-*/
+#index header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;/* 上はstart下はend */
+  padding-top: 5px;
+}
+
+#index nav>ul{
+  display: flex;
+  justify-content: center;
+}
+
+#index nav>ul>li>a{
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+#index nav>ul>li>a:hover{
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+
+.flavor1,.flavor2{
+  color: rgb(51, 51, 51);
+  text-shadow: 0 0 3px rgb(255, 255, 255);
+  font-style: italic;
+  font-weight: bold;
+}
+
+#index main>div:first-child{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#index main>div:last-child{
+  text-align: center;
+}
+
+#index h2{
+  text-align: right;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+#index section{
+  margin-left: 50px;
+}
+
+#index dl{
+  margin-top: 20px;
+}
+#index dt{
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#index dd{
+  margin: 10px 0 0 25px;
+}
+
+#index table{
+  border-collapse: collapse;
+  border: 1px rgb(0, 0, 0) solid;
+}
+#index table th{
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+}
+#index table td{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+#index table th,#index table td{
+  border: 1px rgb(0, 0, 0) solid;
+  padding: 2px 4px;
+  width: 60px;
+}
+#index table tr>th:first-child{
+  width: 100px;
+}
+
+
+  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+レスポンシブ対応：パソコン（1025～）
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+@media screen and (min-width: 1025px) {
+  #wrapper{
+    width: 1000px;
+  }
+  /*-* index *-*-*-*-*-*-*-*-*-*-*-*/
+  #index nav{
+    width: 60%;
+  }
+  #index nav>ul>li{
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    width: 25%;
+  }
+  #index main>div>img{
+    width: 350px;
+  }
+  .flavor1{
+    margin-top: 50px;
+    padding-right: 50px;
+  }
+  .flavor2{
+    padding-left: 50px;
+  }
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+レスポンシブ対応：スマートフォン（0～599）
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  #wrapper{
+    width: 100%;
+  }
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+レスポンシブ対応：タブレット（600～1024）
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+@media screen and (min-width: 600px) and (max-device-width: 1024px) {
+  #wrapper{
+    width: 500px;
+  }
+}
