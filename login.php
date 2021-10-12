@@ -5,7 +5,7 @@ require_once "tmp/session_out.php";
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <title>ABCofHORROR</title>
+    <title>AVACHIofHORROR（仮）</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
@@ -22,13 +22,11 @@ require_once "tmp/session_out.php";
             </table>
           </form>
         </div>
-        <div><p><a href="signup.php">新しく始める</a></p></div>
+        <div><p><a href="newgame.php">新しく始める</a></p></div>
       </main>
       <footer>
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
       </footer>
     </div>
-    <script>
-    </script>
   </body>
 </html>

@@ -13,7 +13,7 @@ catch(PDOException $e){
   <html lang="ja">
     <head>
       <meta charset="UTF-8">
-      <title>ABCofHORROR‐接続エラー</title>
+      <title>AVACHIofHORROR（仮）‐接続エラー</title>
       <link href="style.css" rel="stylesheet">
     </head>
     <body id="error">

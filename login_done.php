@@ -10,7 +10,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result):
   if(password_verify($_POST["pass"],$result["pass"])):
     //ログイン成功
-    $_SESSION['username'] = $result["username"];
+    $_SESSION['username'] = $_POST["username"];
     $_SESSION['pass'] = $_POST["pass"];
     $stmt = null;
     $pdo = null;

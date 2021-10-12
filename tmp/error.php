@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <title>ABCofHORROR‐エラー</title>
+    <title>AVACHIofHORROR（仮）‐エラー</title>
     <link href="style.css" rel="stylesheet">
   </head>
   <body id="error">

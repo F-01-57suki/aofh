@@ -33,7 +33,20 @@ body::before{
   left: 0;
   z-index: -1;
   width: 100%;
-  height: 100vh;
+  height:100vh;
+}
+
+.map0::before{
+  background: url(images/map0.jpg) no-repeat center;
+  background-size: cover;
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height:100vh;
 }
 
 a{
@@ -60,11 +73,13 @@ h1{
 }
 
 /*-* 中央揃え *-*-*-*-*-*-*-*-*-*-*-*/
+
 #wrapper{
+  min-height: 100vh;
   margin:0 auto;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 }
+
 
 /*-* IE対策 *-*-*-*-*-*-*-*-*-*-*-*/
 main{
@@ -73,7 +88,7 @@ main{
 
 /*-* footer(共通) *-*-*-*-*-*-*-*-*-*-*-*/
 footer{
-  margin-top: 50px;
+  padding: 50px 0;
   text-align: center;
 }
 /*-* #error *-*-*-*-*-*-*-*-*-*-*-*/
@@ -116,10 +131,22 @@ footer{
   align-items: center;/* 上はstart下はend */
   padding-top: 5px;
 }
+#index header>div>h1>img{/*仮！！！！！*/
+  width: 80%;
+}
+#index header>div{/*仮！！！！！*/
+  text-align: center;
+}
 
 #index nav>ul{
   display: flex;
   justify-content: center;
+}
+
+#contspn{
+  display: none;
+  line-height: 1;
+  font-size: 1.2rem;
 }
 
 #index nav>ul>li>a{
@@ -132,7 +159,6 @@ footer{
   color: rgb(255, 255, 255);
   text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
 }
-
 .flavor1,.flavor2{
   color: rgb(51, 51, 51);
   text-shadow: 0 0 3px rgb(255, 255, 255);
@@ -193,10 +219,203 @@ footer{
   width: 100px;
 }
 
+/*-* ニューゲーム *-*-*-*-*-*-*-*-*-*-*-*/
+#newgame h1{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
 
-  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
-  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
-  /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+#newgame header>p{
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+
+#newgame main>div{
+  display: flex;
+  justify-content: center;
+}
+#startBtn{
+  margin-top: 50px;
+}
+
+#newgame input{
+  width: 100%;
+}
+
+#newgame th{
+  font-size: 1.8rem;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#newgame td{
+  text-align: center;
+}
+
+#newgame #btn{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#newgame #cbtn{
+  width: 200px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#newgame #cbtn>input{
+  width: 80px;
+}
+
+/*-* スタート *-*-*-*-*-*-*-*-*-*-*-*/
+#start h1,#restart h1{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+#start header>p,#restart header>p{
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+
+#start main>div,#restart main>div{
+  display: flex;
+  justify-content: center;
+}
+
+#restart form{
+  display: flex;
+  justify-content: center;
+}
+#restart main>p{
+  margin: 50px;
+  text-align: center;
+}
+#restart main>p>span{
+  font-weight: bold;
+  color: rgb(102, 0, 0);
+}
+
+#start th{
+  font-size: 1.8rem;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#start td{
+  text-align: center;
+}
+
+#start #btn{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+#start #btn>input{
+  width: 50px;
+}
+
+#start #charaSelect img{
+  margin-top: 15px;
+  width: 80%;
+  height: 80%;
+}
+
+#start #charaSelect{
+  width: 80%;
+}
+
+#start #charaSelect th{
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+  line-height: 1;
+}
+#start #charaSelect th>span{
+  font-size: 1.2rem;
+}
+
+#start #charaSelect input{
+  margin-top: 15px;
+}
+
+#start .skill_h{
+  margin-top: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+#start .skill_d{
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+#start .lost_p{
+  color: rgb(153, 0, 0);
+  font-weight: bold;
+}
+
+/*-* イントロダクション *-*-*-*-*-*-*-*-*-*-*-*/
+#intro h1{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+#intro header>p{
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+
+#intro main{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#intro main>div{
+  margin: 0 auto;
+  width: 80%;
+}
+
+#intro main>div>p{
+  font-size: 1.8rem;
+  margin: 10px 50px 0;
+  line-height: 1.5;
+}
+
+#intro main>div>img{
+  display:block;
+  margin: 50px auto 0;
+}
+#intro main>div>div{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+/*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+/*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+/*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
 
 
 
@@ -214,7 +433,7 @@ footer{
   #index nav>ul>li{
     display: flex;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     width: 25%;
   }
   #index main>div>img{
