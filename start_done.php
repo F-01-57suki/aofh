@@ -31,7 +31,7 @@ else:
   //セーブデータ作成
   $ap = 10;//キャラtblができたらキャラapをとってくる！！！！！！！！！！！！
   $sp = 10;//キャラtblができたらキャラspをとってくる！！！！！！！！！！！！
-  $stmt = $pdo->prepare("INSERT INTO `user_save_tbl` (`username`,`map_id`,`chara_id`,`now_turn`,`now_ap`,`now_sp`,`now_recast`) VALUES (:username,:map_id,:chara_id,0,:now_ap,:now_sp,0)");
+  $stmt = $pdo->prepare("INSERT INTO `user_save_tbl` (`username`,`map_id`,`chara_id`,`now_adv`,`now_turn`,`now_ap`,`now_sp`,`panic_flg`,`now_recast`,`enemies_flg`) VALUES (:username,:map_id,:chara_id,0,0,:now_ap,:now_sp,0,0,0)");
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->bindParam(":map_id",$_POST["stage"]);
   $stmt->bindParam(":chara_id",$_POST["chara"]);

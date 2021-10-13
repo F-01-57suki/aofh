@@ -13,6 +13,17 @@ if($result):
 else:
   $contflag = 0;
 endif;
+$stmt = null;
+
+$stmt = $pdo->prepare("SELECT `point`,`lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
+$stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+//ポイント取得
+$point = $result["point"];
+//キャラ生存数
+$lost = ($result["lost_a"])+($result["lost_t"])+($result["lost_m"])+($result["lost_y"]);
+$stmt = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -45,9 +56,9 @@ endif;
             <h2>進行状況</h2>
             <dl>
               <dt><i class="fas fa-coins"></i> 所持ポイント</dt>
-              <dd><i class="fas fa-ellipsis-h"></i> 1000p</dd>
+              <dd><i class="fas fa-ellipsis-h"></i> <?php echo $point; ?>p</dd>
               <dt><i class="fas fa-heartbeat"></i> 生存キャラ</dt>
-              <dd><i class="fas fa-ellipsis-h"></i> 4/4</dd>
+              <dd><i class="fas fa-ellipsis-h"></i> <?php echo $lost; ?>/4</dd>
               <dt><i class="fas fa-eye"></i> クリア状況</dt>
               <dd><i class="fas fa-ellipsis-h"></i> 1/3</dd>
               <dd>
