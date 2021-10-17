@@ -29,7 +29,7 @@ require_once "tmp/session_out.php";
                 <input type="password" name="pass">
                 <p>※半角英数字のみ、8～16文字まで。<br>※大文字、小文字、数字それぞれ1つ必須。</p>
               </td></tr>
-              <tr><td colspan="2" id="btn"><input type="submit" value="新規データ作成"></td></tr>
+              <tr><td colspan="2" id="btn"><input type="submit" value="新規データ作成" class="btnstyle"></td></tr>
             </table>
           </form>
         </div>

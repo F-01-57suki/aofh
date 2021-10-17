@@ -21,7 +21,7 @@ catch(PDOException $e){
         <main>
           <h1>接続エラー</h1>
           <p>接続に失敗しました。<br>時間をおいて、再度お試しください。</p>
-          <p><input type="button" value="戻る" onclick='history.go(-1)'></p>
+          <p><input type="button" value="戻る" onclick='history.go(-1)' class="btnstyle"></p>
         </main>
         <footer>
           <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>

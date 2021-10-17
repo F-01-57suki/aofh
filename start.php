@@ -26,7 +26,7 @@ if($result):
       <main>
         <p>進行中のセーブデータがあります！<br><span>現在のセーブを破棄し</span>、新たにゲームを開始しますか？</p>
         <form action="restart.php" method="post">
-          <input type="submit" value="破棄して開始">
+          <input type="submit" value="破棄して開始" class="btnstyle">
         </form>
       </main>
       <footer>
@@ -68,9 +68,9 @@ $stmt = null;
             <tr><th>Stage Select</th></tr>
               <tr><td>
                 <select name="stage">
-                <option value="0">きさらぎ駅</option>
-                <option value="1">ほにゃらら</option>
-                <option value="2">オーモンド山</option>
+                <option value="1">きさらぎ駅</option>
+                <option value="2">ほにゃらら</option>
+                <option value="3">オーモンド山</option>
               </select>
               </td></tr>
               <tr><th>Character Select</th></tr>
@@ -106,7 +106,7 @@ $stmt = null;
                   <tr>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 壊れたラジオ</p><p class="skill_d">接敵前に回避行動が可能<br>（リキャスト5T）</p></td>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 石蒜の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
+                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 錆びた鉄パイプ</p><p class="skill_d">HP消費でゴースト以外撃破<br>（常時発動）</p></td>
                   </tr>
                   <tr>
@@ -128,7 +128,7 @@ $stmt = null;
                   </tr>
                 </table>
               </td></tr>
-              <tr><td colspan="2" id="btn"><input type="submit" value="確認"></td></tr>
+              <tr><td colspan="2" id="btn"><input type="submit" value="確認画面へ" class="btnstyle"></td></tr>
             </table>
           </form>
         </div>

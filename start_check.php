@@ -34,7 +34,7 @@ if($result):
       <main>
         <p>進行中のセーブデータがあります！<br><span>現在のセーブを破棄し</span>、新たにゲームを開始しますか？</p>
         <form action="restart.php" method="post">
-          <input type="submit" value="破棄して開始">
+          <input type="submit" value="破棄して開始" class="btnstyle">
         </form>
       </main>
       <footer>
@@ -114,7 +114,7 @@ endif;
                     <?php elseif($_POST["chara"] == 1): ?>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
                     <?php elseif($_POST["chara"] == 2): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 石蒜の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
+                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
                     <?php elseif($_POST["chara"] == 3): ?>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 錆びた鉄パイプ</p><p class="skill_d">HP消費でゴースト以外撃破<br>（常時発動）</p></td>
                     <?php endif; ?>
@@ -122,10 +122,11 @@ endif;
                 </table>
               </td></tr>
               <tr>
-                <td colspan="2" id="btn">
+                <td colspan="2" id="btn_c">
                   <input type="hidden" name="stage" value="<?php echo $_POST["stage"]; ?>">
                   <input type="hidden" name="chara" value="<?php echo $_POST["chara"]; ?>">
-                  <input type="submit" value="開始する">
+                  <input type="button" value="戻る" onclick='history.go(-1)' class="btnstyle">
+                  <input type="submit" value="開始" class="btnspan">
                 </td>
               </tr>
             </table>

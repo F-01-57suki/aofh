@@ -60,8 +60,8 @@ else:
         </div>
         <div>
           <form action="newgame_done.php" method="post" id="cbtn">
-            <input type="button" value="戻る" onclick='history.go(-1)'>
-            <input type="submit" value="登録">
+            <input type="button" value="戻る" onclick='history.go(-1)' class="btnstyle">
+            <input type="submit" value="登録" class="btnspan">
             </form>
         </div>
       </main>

@@ -67,6 +67,26 @@ ul{
   list-style: none;
 }
 
+.btnstyle{
+  padding: 5px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 0 rgba(204, 204, 204,0.5);
+  border-top: 2px solid rgba(255, 255, 255, 0.5);
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 2px 1px 0 rgba(51, 51, 51,0.5);
+}
+
+.btnspan{
+  padding: 5px;
+  background-color: rgb(102, 0, 0);
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 0 rgba(204, 204, 204,0.5);
+  border-top: 2px solid rgba(255, 255, 255, 0.5);
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 2px 1px 0 rgba(51, 51, 51,0.5);
+
+}
 /*-* 行間 *-*-*-*-*-*-*-*-*-*-*-*/
 h1{
   line-height:1;
@@ -122,6 +142,66 @@ footer{
 #loginbtn{
   margin-top: 30px;
   width: 80%;
+}
+
+#info{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+#map_gage{
+  width: 250px;
+  margin: 30px auto 0;
+}
+
+#gage_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#gage_all{
+  height: 15px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: rgba(0, 0, 0,0.5);
+  border: 1px solid rgb(255, 255, 255);
+}
+#gage_now{
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(rgb(255, 0, 51), rgb(102, 0, 0));
+  border-top: 2px solid rgb(255, 102, 102);
+  border-left: 2px solid rgb(255, 102, 102);
+}
+
+#panic_span{
+  font-weight: bold;
+  color: rgb(153, 0, 0);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+
+#action{
+  margin-top: 30px;
+
+}
+#action .action_btn{
+  border: none;
+  font-size: 3rem;
+  font-family: 'New Tegomin', serif;
+  font-weight: bold;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+#action .action_btn:hover{
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
 }
 
 /*-* index *-*-*-*-*-*-*-*-*-*-*-*/
@@ -248,6 +328,10 @@ footer{
   width: 100%;
 }
 
+#newgame .btnstyle{
+  width: fit-content;
+}
+
 #newgame th{
   font-size: 1.8rem;
   padding-top: 20px;
@@ -326,8 +410,15 @@ footer{
   display: flex;
   justify-content: center;
 }
-#start #btn>input{
-  width: 50px;
+
+#start #btn_c{
+  width: 200px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+#start #btn_c>input{
+  width: 80px;
 }
 
 #start #charaSelect img{

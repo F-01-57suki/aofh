@@ -12,7 +12,7 @@
         <h1><?php echo $key; ?>エラー</h1>
         <p><?php echo $value; ?></p>
 <?php endforeach; ?>
-        <p><input type="button" value="戻る" onclick='history.go(-1)'></p>
+        <p><input type="button" value="戻る" onclick='history.go(-1)' class="btnstyle"></p>
       </main>
       <footer>
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>

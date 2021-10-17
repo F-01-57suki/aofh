@@ -19,7 +19,7 @@ else:
 endif;
 
 //マップサイズと評価を取得
-$stmt = $pdo->prepare("SELECT `map_size`,`rank_s_turn`,`rank_s_point`,`rank_a_turn`,`rank_a_point`,`rank_b_turn`,`rank_b_point`,`rank_c_point`, FROM `map_tbl` WHERE `map_id`=:map_id");
+$stmt = $pdo->prepare("SELECT `map_name`,`map_size`,`rank_s_turn`,`rank_a_turn`,`rank_b_turn`,`rank_s_point`,`rank_a_point`,`rank_b_point`,`rank_c_point`, FROM `map_tbl` WHERE `map_id`=:map_id");
 $stmt->bindParam(":map_id",$map_id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,12 +27,13 @@ if(!$result):
   header('Location: index.php');
   die();
 else:
+  $map_name = $result["map_name"];
   $map_size = $result["map_size"];
   $rank_s_turn = $result["rank_s_turn"];
-  $rank_s_point = $result["rank_s_point"];
   $rank_a_turn = $result["rank_a_turn"];
-  $rank_a_point = $result["rank_a_point"];
   $rank_b_turn = $result["rank_b_turn"];
+  $rank_s_point = $result["rank_s_point"];
+  $rank_a_point = $result["rank_a_point"];
   $rank_b_point = $result["rank_b_point"];
   $rank_c_point = $result["rank_c_point"];
   $stmt = null;
