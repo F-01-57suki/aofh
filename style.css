@@ -144,66 +144,6 @@ footer{
   width: 80%;
 }
 
-#info{
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.8rem;
-}
-
-#map_gage{
-  width: 250px;
-  margin: 30px auto 0;
-}
-
-#gage_title{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-
-#gage_all{
-  height: 15px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  background-color: rgba(0, 0, 0,0.5);
-  border: 1px solid rgb(255, 255, 255);
-}
-#gage_now{
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(rgb(255, 0, 51), rgb(102, 0, 0));
-  border-top: 2px solid rgb(255, 102, 102);
-  border-left: 2px solid rgb(255, 102, 102);
-}
-
-#panic_span{
-  font-weight: bold;
-  color: rgb(153, 0, 0);
-  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
-}
-
-#action{
-  margin-top: 30px;
-
-}
-#action .action_btn{
-  border: none;
-  font-size: 3rem;
-  font-family: 'New Tegomin', serif;
-  font-weight: bold;
-  background-color: transparent;
-  color: rgb(255, 255, 255);
-  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
-  cursor: pointer;
-}
-
-#action .action_btn:hover{
-  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
-}
-
 /*-* index *-*-*-*-*-*-*-*-*-*-*-*/
 #index header{
   display: flex;
@@ -261,6 +201,9 @@ footer{
   text-align: right;
   border-bottom: 1px solid rgb(0, 0, 0);
 }
+#index .h2nplus2{
+  margin-top: 20px;
+}
 
 #index section{
   margin-left: 50px;
@@ -279,6 +222,7 @@ footer{
 }
 
 #index table{
+  margin-top: 20px;
   border-collapse: collapse;
   border: 1px rgb(0, 0, 0) solid;
 }
@@ -292,7 +236,7 @@ footer{
 }
 #index table th,#index table td{
   border: 1px rgb(0, 0, 0) solid;
-  padding: 2px 4px;
+  padding: 1px 4px;
   width: 60px;
 }
 #index table tr>th:first-child{
@@ -503,8 +447,144 @@ footer{
   justify-content: center;
 }
 
+/*-* ターン *-*-*-*-*-*-*-*-*-*-*-*/
+#turn main>div{
+  display: flex;
+  justify-content: center;
+}
 
-/*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+#turn input{
+  width: 100%;
+}
+
+#turn .btnstyle{
+  width: fit-content;
+}
+
+#turn th{
+  font-size: 1.8rem;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#turn td{
+  text-align: center;
+}
+
+#turn #btn{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#turn #cbtn{
+  width: 200px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#turn #cbtn>input{
+  width: 80px;
+}
+
+/*-* ターンセット *-*-*-*-*-*-*-*-*-*-*-*/
+#turn header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;/* 上はstart下はend */
+  padding-top: 5px;
+  margin: 0 50px;
+}
+#turn header>div{
+  text-align: center;
+}
+
+#turn main>div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#turn main>div>img{
+  margin-right: 100px;
+  width: 30%;
+  height: 30%;
+}
+
+#info{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+  text-align: right;
+}
+
+#map_gage{
+  width: 250px;
+  margin: 30px auto 0;
+}
+
+#gage_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#gage_all{
+  height: 15px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: rgba(0, 0, 0,0.5);
+  border: 1px solid rgb(255, 255, 255);
+}
+#gage_now{
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(rgb(255, 0, 51), rgb(102, 0, 0));
+  border-top: 2px solid rgb(255, 102, 102);
+  border-left: 2px solid rgb(255, 102, 102);
+}
+
+#panic_span{
+  font-weight: bold;
+  color: rgb(255, 255, 0);
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+
+#action{
+  margin-top: 30px;
+
+}
+#action .action_btn{
+  border: none;
+  font-size: 3rem;
+  font-family: 'New Tegomin', serif;
+  font-weight: bold;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+#action .action_btn:hover{
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+
+.system_span{
+  color: rgb(0, 51, 153);
+}
+
+.next_turn{
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+.next_turn:hover{
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+
 /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
 /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
 

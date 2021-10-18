@@ -21,7 +21,6 @@ else:
   die();
 endif;
 ?>
-      <main>
         <div>
 <?php
 if($_POST["action"] == "rest"):
@@ -32,7 +31,7 @@ if($_POST["action"] == "rest"):
   $stmt = null;
   ?>
   <p><br>少し休憩した</p><br>
-  <a href="turn.php">次のターンへ</a>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 elseif($_POST["action"] == "move"):
   //進む
@@ -42,7 +41,7 @@ elseif($_POST["action"] == "move"):
   $stmt = null;
   ?>
   <p><br>先へ進んだ</p><br>
-  <a href="turn.php">次のターンへ</a>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 else:
   //戻る
@@ -52,7 +51,7 @@ else:
   $stmt = null;
   ?>
   <p><br>来た道を戻った</p><br>
-  <a href="turn.php">次のターンへ</a>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 endif;
 ?>

@@ -12,18 +12,16 @@ if($action_flg):
     $stmt->execute();
     $stmt = null;
     ?>
-    <main>
-      <div>
         <p>パニックで動けない……。</p>
-        <a href="turn.php">次のターンへ</a>
+      </div>
+      <div>
+        <a href="turn.php" class="next_turn">次のターンへ</a>
       </div>
     </main>
     <?php
   else:
   //行動選択画面を表示
   ?>
-    <main>
-      <div>
         <form action="action.php" method="post" id="action">
           <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
           <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
@@ -32,11 +30,11 @@ if($action_flg):
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if($result["now_adv"] >= 1):  
-  ?>
+    if($result["now_adv"] >= 1):
+    ?>
           <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
-  <?php
-  endif;
+    <?php
+    endif;
   $stmt = null;
   ?>
         </form>
@@ -48,8 +46,48 @@ else:
   //ターンイベントの抽選（接敵フラグorアイテム）
   //接敵フラグの判定
   if($enemies_flg == 1):
-    //接敵イベントへ
-    require_once "tmp/battle.php";
+    //接敵イベントをセット
+    if($enemy_id == 0):
+      //敵を抽選し、セーブにセット
+      require_once "tmp/enemy_set.php";
+    endif;
+    //敵パラメータを取得
+    $stmt = $pdo->prepare("SELECT `enemy_name`,`enemy_type`,`enemy_speed`,`enemy_wisdom`,`add_damage`,`add_fear` FROM `enemy_tbl` WHERE `enemy_id`=:enemy_id");
+    $stmt->bindParam(":enemy_id",$enemy_id);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    //セッションに一時格納
+    $_SESSION["enemy_name"] = $result["enemy_name"];
+    $_SESSION["enemy_type"] = $result["enemy_type"];
+    $_SESSION["enemy_speed"] = $result["enemy_speed"];
+    $_SESSION["enemy_wisdom"] = $result["enemy_wisdom"];
+    $_SESSION["add_damage"] = $result["add_damage"];
+    $_SESSION["add_fear"] = $result["add_fear"];
+    $_SESSION["chara_id"] = $chara_id;
+    $_SESSION["chara_speed"] = $chara_speed;
+    $_SESSION["chara_stealth"] = $chara_stealth;
+    $stmt = null;
+    ?>
+        <form action="battle.php" method="post" id="action">
+    <?php
+    if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
+      ?>
+          <button type="submit" name="battle" value="kill" class="action_btn">撃破</button><br>
+      <?php
+    elseif($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost"):
+      ?>
+      <button type="submit" name="battle" value="purify" class="action_btn">お祓い</button><br>
+      <?php
+    endif;
+    $stmt = null;
+    ?>
+          <button type="submit" name="battle" value="stealth" class="action_btn">隠れる</button><br>
+          <button type="submit" name="battle" value="speed" class="action_btn">逃げる</button><br>
+        </form>
+      </div>
+      <div><p>異質な気配が近付く……。<br><span class="system_span">SAN値が<?php echo $_SESSION["add_fear"]; ?>減少。</span></p></div>
+    </main>
+    <?php
   else:
     //接敵フラグを抽選、当たれば加算。
     $enemies_lottery = mt_rand(1,10);
@@ -77,14 +115,15 @@ else:
       //パニックなら操作不能
       if($panic_flg):
         //強制で休む
-        $now_ap += 1;
-        $now_sp += 1;
-        $now_turn += 1;
+        $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+        $stmt->bindParam(":username",$_SESSION["username"]);
+        $stmt->execute();
+        $stmt = null;
         ?>
-        <main>
-          <div>
             <p>パニックで動けない……。</p>
-            <a href="turn.php">次のターンへ</a>
+          </div>
+          <div>
+            <a href="turn.php" class="next_turn">次のターンへ</a>
           </div>
         </main>
         <?php
@@ -95,8 +134,6 @@ else:
       $stmt->execute();
       $stmt = null;
       ?>
-    <main>
-      <div>
         <form action="action.php" method="post" id="action">
           <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
           <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
@@ -105,13 +142,13 @@ else:
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($result["now_adv"] >= 1):  
+        if($result["now_adv"] >= 1):
       ?>
           <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
-  <?php
-  endif;
-  $stmt = null;
-  ?>
+      <?php
+      endif;
+      $stmt = null;
+      ?>
         </form>
       </div>
     </main>
@@ -128,7 +165,6 @@ endif;
     <script>
       const gage_now = document.getElementById("gage_now");
       gage_now.style.width = "<?php echo $map_percent; ?>%";
-      console.log(<?php echo $map_percent; ?>);
     </script>
   </body>
 </html>

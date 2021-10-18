@@ -13,8 +13,8 @@ foreach($result as $key => $value):
 endforeach;
 $stmt = null;
 //もしロストキャラを選んでいたらエラー
-if($lost_a == 0 and $_POST["chara"] == 0 or $lost_t == 0 and $_POST["chara"] == 1 or $lost_m == 0 and $_POST["chara"] == 2 or $lost_y == 0 and $_POST["chara"] == 3):
-  $errors["セーブ"] = "ロストしているキャラクターを選択しています。";
+if($lost_a == 1 and $_POST["chara"] == 1 or $lost_t == 1 and $_POST["chara"] == 2 or $lost_m == 1 and $_POST["chara"] == 3 or $lost_y == 1 and $_POST["chara"] == 4):
+  $errors["キャラクター選択"] = "ロストしているキャラクターです。";
   require_once "tmp/error.php";
 endif;
 
@@ -31,7 +31,7 @@ else:
   //セーブデータ作成
   $ap = 10;//キャラtblができたらキャラapをとってくる！！！！！！！！！！！！
   $sp = 10;//キャラtblができたらキャラspをとってくる！！！！！！！！！！！！
-  $stmt = $pdo->prepare("INSERT INTO `user_save_tbl` (`username`,`map_id`,`chara_id`,`now_adv`,`now_turn`,`now_ap`,`now_sp`,`panic_flg`,`now_recast`,`enemies_flg`,`action_flg`) VALUES (:username,:map_id,:chara_id,0,0,:now_ap,:now_sp,0,0,0,0)");
+  $stmt = $pdo->prepare("INSERT INTO `user_save_tbl` (`username`,`map_id`,`chara_id`,`now_adv`,`now_turn`,`now_ap`,`now_sp`,`panic_flg`,`now_recast`,`enemies_flg`,`action_flg`,`enemy_id`) VALUES (:username,:map_id,:chara_id,0,0,:now_ap,:now_sp,0,0,0,0,0)");
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->bindParam(":map_id",$_POST["stage"]);
   $stmt->bindParam(":chara_id",$_POST["chara"]);

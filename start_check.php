@@ -56,7 +56,7 @@ foreach($result as $key => $value):
 endforeach;
 $stmt = null;
 //もしロストキャラを選んでいたらエラー
-if($lost_a == 0 and $_POST["chara"] == 0 or $lost_t == 0 and $_POST["chara"] == 1 or $lost_m == 0 and $_POST["chara"] == 2 or $lost_y == 0 and $_POST["chara"] == 3):
+if($lost_a == 1 and $_POST["chara"] == 1 or $lost_t == 1 and $_POST["chara"] == 2 or $lost_m == 1 and $_POST["chara"] == 3 or $lost_y == 1 and $_POST["chara"] == 4):
   $errors["キャラクター選択"] = "ロストしているキャラクターです。";
   require_once "tmp/error.php";
 endif;
@@ -85,37 +85,37 @@ endif;
               <tr><td id="charaSelect">
                 <table>
                   <tr>
-                    <?php if($_POST["chara"] == 0): ?>
+                    <?php if($_POST["chara"] == 1): ?>
                     <th>新 城<br><span>-Sinjo-</span></th>
-                    <?php elseif($_POST["chara"] == 1): ?>
-                    <th>蘆 野<br><span>-Ashino-</span></th>
                     <?php elseif($_POST["chara"] == 2): ?>
-                    <th>苅 場<br><span>-Kariba-</span></th>
+                    <th>蘆 野<br><span>-Ashino-</span></th>
                     <?php elseif($_POST["chara"] == 3): ?>
-                    <th>赤 羽<br><span>-Akaba-</span></th>
+                    <th>狩 場<br><span>-Kariba-</span></th>
+                    <?php elseif($_POST["chara"] == 4): ?>
+                    <th>赤 羽<br><span>-Akaha-</span></th>
                     <?php endif; ?>
                   </tr>
                   <tr>
                     <td>
-                    <?php if($_POST["chara"] == 0): ?>
+                    <?php if($_POST["chara"] == 1): ?>
                       <img src="images/chara_a1.png" alt="キャラ（A）">
-                    <?php elseif($_POST["chara"] == 1): ?>
-                      <img src="images/chara_t1.png" alt="キャラ（T）">
                     <?php elseif($_POST["chara"] == 2): ?>
-                      <img src="images/chara_m1.png" alt="キャラ（M）">
+                      <img src="images/chara_t1.png" alt="キャラ（T）">
                     <?php elseif($_POST["chara"] == 3): ?>
+                      <img src="images/chara_m1.png" alt="キャラ（M）">
+                    <?php elseif($_POST["chara"] == 4): ?>
                       <img src="images/chara_y1.png" alt="キャラ（Y）">
                     <?php endif; ?>
                     </td>
                   </tr>
                   <tr>
-                    <?php if($_POST["chara"] == 0): ?>
+                    <?php if($_POST["chara"] == 1): ?>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 壊れたラジオ</p><p class="skill_d">接敵前に回避行動が可能<br>（リキャスト5T）</p></td>
-                    <?php elseif($_POST["chara"] == 1): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
                     <?php elseif($_POST["chara"] == 2): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
+                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
                     <?php elseif($_POST["chara"] == 3): ?>
+                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
+                    <?php elseif($_POST["chara"] == 4): ?>
                     <td><p class="skill_h"><i class="fas fa-toolbox"></i> 錆びた鉄パイプ</p><p class="skill_d">HP消費でゴースト以外撃破<br>（常時発動）</p></td>
                     <?php endif; ?>
                   </tr>

@@ -18,19 +18,31 @@ $event_id_lottery = mt_rand(1,$event_count);
 if($event_id_lottery == 1):
 //$event_idが1のイベント
 ?>
-<p>イベント１</p><br><a href="turn.php">次のターンへ</a>
+  <p>イベント（１）</p>
+</div>
+<div>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
+</div>
 <?php
 /////////////////////////////////////////////////////////////////////
 elseif($event_id_lottery == 2):
 //$event_idが2のイベント
 ?>
-<p>イベント２が発生</p><br><a href="turn.php">次のターンへ</a>
+  <p>イベント（２）</p>
+</div>
+<div>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
+</div>
 <?php
 /////////////////////////////////////////////////////////////////////
 else:
 //$event_idが3～のイベント
 ?>
-<p>イベント３</p><br><a href="turn.php">次のターンへ</a>
+  <p>イベント（３）</p>
+</div>
+<div>
+  <a href="turn.php" class="next_turn">次のターンへ</a>
+</div>
 <?php
 endif;
 ?>

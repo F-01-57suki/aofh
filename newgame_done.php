@@ -30,7 +30,7 @@ if(count($errors)!==0):
 else:
   //user_tbl
   $news = "none";
-  $stmt = $pdo->prepare("INSERT INTO `user_tbl` (`username`,`pass`,`point`,`lost_a`,`lost_t`,`lost_m`,`lost_y`,`news`) VALUES (:username,:pass,0,1,1,1,1,:news)");
+  $stmt = $pdo->prepare("INSERT INTO `user_tbl` (`username`,`pass`,`point`,`lost_a`,`lost_t`,`lost_m`,`lost_y`,`news`) VALUES (:username,:pass,10,0,0,0,0,:news)");
   $stmt->bindParam(":username",$_SESSION['ucheck']);
   $stmt->bindParam(":pass",$pass);
   $stmt->bindParam(":news",$news);

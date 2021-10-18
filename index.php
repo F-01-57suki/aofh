@@ -4,26 +4,38 @@ require_once "tmp/db.php";
 
 $contflag = 1;
 //途中セーブの確認
-$stmt = $pdo->prepare("SELECT * FROM `user_save_tbl` WHERE `username`=:username");
+$stmt = $pdo->prepare("SELECT `map_id`,`chara_id`,`panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result):
   $contflag = 1;
+  $map_id = $result["map_id"];      //マップの背景用に取得
+  $chara_id = $result["chara_id"];  //TOP絵用に取得
+  $panic_flg = $result["panic_flg"];//TOP絵用に取得
 else:
   $contflag = 0;
 endif;
 $stmt = null;
 
-$stmt = $pdo->prepare("SELECT `point`,`lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
+//ユーザー情報の取得
+$stmt = $pdo->prepare("SELECT `point`,`lost_a`,`lost_t`,`lost_m`,`lost_y`,`news` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-//ポイント取得
+//所持ポイント
 $point = $result["point"];
 //キャラ生存数
-$lost = ($result["lost_a"])+($result["lost_t"])+($result["lost_m"])+($result["lost_y"]);
+$lost = 4-($result["lost_a"])+($result["lost_t"])+($result["lost_m"])+($result["lost_y"]);
+//ユーザニュースの取得
+$news = $result["news"];
 $stmt = null;
+
+//クリア状況を取得
+//マップごとに集計、クリアデータ１つでもあればクリアカウント
+
+//ランキングの取得
+//考え中・・・・（自分の順位を取得できるか？できなければマップごと一位のみ
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -44,7 +56,7 @@ $stmt = null;
           <ul>
             <li><a href="start.php">Start</a></li>
             <li><a href="continue.php" id="contli">Continue<span id="contspn"><i class="fas fa-exclamation-triangle"></i> 進行中</span></a></li>
-            <li><a href="#">Shop</a></li>
+            <li><s>Shop</s></li><!-- 未実装なのでいったん閉じ -->
             <li><a href="logout.php">Exit</a></li>
           </ul>
         </nav>
@@ -61,32 +73,30 @@ $stmt = null;
               <dd><i class="fas fa-ellipsis-h"></i> <?php echo $lost; ?>/4</dd>
               <dt><i class="fas fa-eye"></i> クリア状況</dt>
               <dd><i class="fas fa-ellipsis-h"></i> 1/3</dd>
-              <dd>
-                <table>
-                  <caption>‐総合ランキング‐</caption>
-                  <tr>
-                    <th>マップ名</th>
-                    <th>順位</th>
-                    <th>スコア</th>
-                  </tr>
-                  <tr>
-                    <td>ほにゃ</td>
-                    <td>1位</td>
-                    <td>10T</td>
-                  </tr>
-                  <tr>
-                    <td>ららら</td>
-                    <td>3位</td>
-                    <td>220T</td>
-                  </tr>
-                  <tr>
-                    <td>オーモンド</td>
-                    <td>UC</td>
-                    <td>0T</td>
-                  </tr>
-                </table>
-              </dd>
             </dl>
+            <h2 class="h2nplus2">総合ランキング</h2>
+            <table>
+              <tr>
+                <th>マップ名</th>
+                <th>順位</th>
+                <th>スコア</th>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>-位</td>
+                <td>-T</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>-位</td>
+                <td>-T</td>
+              </tr>
+              <tr>
+                <td>オーモンド</td>
+                <td>UC</td>
+                <td>0T</td>
+              </tr>
+            </table>
           </section>
         </div>
         <div>
