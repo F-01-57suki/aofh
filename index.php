@@ -26,7 +26,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 //所持ポイント
 $point = $result["point"];
 //キャラ生存数
-$lost = 4-($result["lost_a"])+($result["lost_t"])+($result["lost_m"])+($result["lost_y"]);
+$lost = 4-($result["lost_a"]+$result["lost_t"]+$result["lost_m"]+$result["lost_y"]);
 //ユーザニュースの取得
 $news = $result["news"];
 $stmt = null;
@@ -56,7 +56,7 @@ $stmt = null;
           <ul>
             <li><a href="start.php">Start</a></li>
             <li><a href="continue.php" id="contli">Continue<span id="contspn"><i class="fas fa-exclamation-triangle"></i> 進行中</span></a></li>
-            <li><s>Shop</s></li><!-- 未実装なのでいったん閉じ -->
+            <li><a href="shop.php">Shop</a></li>
             <li><a href="logout.php">Exit</a></li>
           </ul>
         </nav>

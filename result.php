@@ -19,7 +19,7 @@ else:
 endif;
 
 //マップサイズと評価を取得
-$stmt = $pdo->prepare("SELECT `map_name`,`map_size`,`rank_s_turn`,`rank_a_turn`,`rank_b_turn`,`rank_s_point`,`rank_a_point`,`rank_b_point`,`rank_c_point`, FROM `map_tbl` WHERE `map_id`=:map_id");
+$stmt = $pdo->prepare("SELECT `map_name`,`map_size`,`rank_s_turn`,`rank_a_turn`,`rank_b_turn`,`rank_s_point`,`rank_a_point`,`rank_b_point`,`rank_c_point` FROM `map_tbl` WHERE `map_id`=:map_id");
 $stmt->bindParam(":map_id",$map_id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -68,27 +68,23 @@ else://C判定
   $addp = $rank_c_point;
 endif;
 
-//ポイント確定
-$point += $addp;
+//ニュース入れ込み
+$news = "clear_m".$map_id."_c".$chara_id;//clear_m0_c0
 //ポイント加算
-$stmt = $pdo->prepare("UPDATE `user_tbl` SET `point`=:point WHERE `username`=:username");
-$stmt->bindParam(":point",$point);
+$stmt = $pdo->prepare("UPDATE `user_tbl` SET `point`=`point`+:addp,`news`=:news WHERE `username`=:username");
+$stmt->bindParam(":addp",$addp);
+$stmt->bindParam(":news",$news);
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
 
-//マップのクリアフラグを入れる（判定不要で1を加算）
-if($map_id == 0):
-  $stmt = $pdo->prepare("UPDATE `user_clear_tbl` SET `カラム名`=`カラム名`+1  WHERE `username`=:username");
-elseif($map_id == 1):
-  //マップごとにSQL分変える
-  $stmt = $pdo->prepare("UPDATE `user_clear_tbl` SET `カラム名`=`カラム名`+1  WHERE `username`=:username");
-else:
-  $errors["リザルト"] = "セーブデータが破損しています。";
-  require_once "tmp/error.php";
-  die();
-endif;
+//クリアデータの保存
+$stmt = $pdo->prepare("INSERT INTO `clear_save_tbl` (`username`,`map_id`,`chara_id`,`clear_turn`,`rank`) VALUES (:username,:map_id,:chara_id,:clear_turn,:rank)");
 $stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->bindParam(":map_id",$map_id);
+$stmt->bindParam(":chara_id",$chara_id);
+$stmt->bindParam(":clear_turn",$now_turn);
+$stmt->bindParam(":rank",$rank);
 $stmt->execute();
 $stmt = null;
 
@@ -99,8 +95,9 @@ $stmt->execute();
 $stmt = null;
 
 //評価の表示とエピローグ
+echo "あなたのランクは、「",$rank,"」でした！<br>ポイントを",$addp,"獲得しました。";
 //「$rank」ごとに画像を変える。加算ポイントのテキストは「$addp」を表示
 //リザルトの後にエピローグ
-
 //クリックでindexに飛ぶ
 ?>
+<a href="index.php">TOP画面へ</a>

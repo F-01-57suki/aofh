@@ -108,18 +108,46 @@ endif;
           <div id="map_gage">
             <div id="gage_title"><p>0%&nbsp;&nbsp; </p><p>&nbsp;50%</p><p>100%</p></div>
             <div id="gage_all"><div id="gage_now"></div></div>
-            <p>残りの距離：<?php echo $map_remain; ?></p>
+            <p>残りの距離&emsp;<?php echo $map_remain; ?></p>
           </div>
           <div id="info">
-            <p>現在のターン：<?php echo $now_turn; ?></p>
-            <p>AP：<?php echo $now_ap; ?>｜SP：<?php
-            echo $now_sp;
-            if($panic_flg): ?>
-            <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
-              <?php endif; ?></p>
+            <p>
+              ＴＵＲＮ‐ <span id="now_turn"><?php echo $now_turn; ?></span>
+            </p>
+            <p>
+              <i class="fas fa-heartbeat fa-fw"></i> ＡＰ：<span id="now_ap"><?php echo $now_ap; ?></span>
+              &emsp;
+              <i class="fas fa-brain fa-fw"></i> ＳＰ：<span id="now_sp"><?php echo $now_sp; ?></span>
+              <?php if($panic_flg): ?>
+              <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
+            <?php endif; ?>
+            </p>
           </div>
         </div>
       </header>
       <main>
         <div>
-          <img src="images/a_panik.png" alt="選択キャラクター画像">
+          <img src="images/turn_t_n.png" alt="選択キャラクター">
+<?php
+//////////////////////////////////////////
+/*キャラ分画像が出来たら、imgタグの出し分け
+if($chara_id == 1):
+  if($panic_flg == 1):
+    //パニック中
+    <img src="images/ほにゃ" alt="選択キャラクター（パニック中）">
+  elseif($enemy_id != 0):
+    //接敵中
+    <img src="images/ほにゃ" alt="選択キャラクター（接敵中）">
+  else:
+    //通常時
+    <img src="images/ほにゃ" alt="選択キャラクター">
+  endif;
+elseif($chara_id == 2):
+elseif($chara_id == 3):
+elseif($chara_id == 4):
+else:
+  die("エラーです");
+endif;
+*/
+//////////////////////////////////////////
+?>

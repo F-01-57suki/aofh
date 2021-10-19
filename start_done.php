@@ -28,9 +28,14 @@ if($result):
   require_once "tmp/error.php";
 else:
   $stmt = null;
+  //選択キャラのステータス取得
+  $stmt = $pdo->prepare("SELECT `chara_ap`,`chara_sp` FROM `chara_tbl` WHERE `chara_id`=:chara_id");
+  $stmt->bindParam(":chara_id",$_POST["chara"]);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  $ap = $result["chara_ap"];
+  $sp = $result["chara_sp"];
   //セーブデータ作成
-  $ap = 10;//キャラtblができたらキャラapをとってくる！！！！！！！！！！！！
-  $sp = 10;//キャラtblができたらキャラspをとってくる！！！！！！！！！！！！
   $stmt = $pdo->prepare("INSERT INTO `user_save_tbl` (`username`,`map_id`,`chara_id`,`now_adv`,`now_turn`,`now_ap`,`now_sp`,`panic_flg`,`now_recast`,`enemies_flg`,`action_flg`,`enemy_id`) VALUES (:username,:map_id,:chara_id,0,0,:now_ap,:now_sp,0,0,0,0,0)");
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->bindParam(":map_id",$_POST["stage"]);

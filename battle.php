@@ -139,9 +139,8 @@ elseif($_POST["battle"] == "stealth"):
       $panic_flg = $result["panic_flg"];
       $stmt = null;
     endif;
-    require_once "tmp/battle_end.php";
     ?>
-      <p>ステルスしっぱい・・・・・・</p>
+      <p>咄嗟に隠れるも、すぐに見つかってしまった。<br><span class="system_span">回避に失敗し、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -223,9 +222,8 @@ elseif($_POST["battle"] == "speed"):
       $panic_flg = $result["panic_flg"];
       $stmt = null;
     endif;
-    require_once "tmp/battle_end.php";
     ?>
-      <p>にげれんかった・・・・・・</p>
+      <p>走って逃げるも、すぐに追いつかれてしまった。<br><span class="system_span">回避に失敗し、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>

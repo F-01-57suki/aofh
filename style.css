@@ -97,7 +97,7 @@ h1{
 #wrapper{
   min-height: 100vh;
   margin:0 auto;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 
@@ -515,7 +515,18 @@ footer{
   margin-top: 20px;
   text-align: center;
   font-size: 1.8rem;
+  font-weight: bold;
   text-align: right;
+}
+
+#now_turn{
+  font-size: 3rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153);
+}
+#now_ap,#now_sp{
+  font-size: 2rem;
+  text-shadow: 1px 0 0 rgb(255, 255, 255),0 1px 0 rgb(255, 255, 255),-1px 0 0 rgb(255, 255, 255),0 -1px 0 rgb(255, 255, 255);
 }
 
 #map_gage{

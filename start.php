@@ -38,6 +38,19 @@ if($result):
 <?php
 else:
 $stmt = null;
+//スキルの取得
+$skill_namearr = array();
+$skill_effectarr = array();
+$skill_recastarr = array();
+$stmt = $pdo->prepare("SELECT `skill_name`,`skill_effect`,`skill_recast`,`chara_id` FROM `skill_tbl`");
+$stmt->execute();
+while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
+  $chara_id = $result["chara_id"];
+  $skill_namearr[$chara_id] = $result["skill_name"];
+  $skill_effectarr[$chara_id] = $result["skill_effect"];
+  $skill_recastarr[$chara_id] = $result["skill_recast"];
+endwhile;
+
 //キャラデータの確認
 $stmt = $pdo->prepare("SELECT `lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
@@ -69,8 +82,8 @@ $stmt = null;
               <tr><td>
                 <select name="stage">
                 <option value="1">きさらぎ駅</option>
-                <option value="2">ほにゃらら</option>
-                <option value="3">オーモンド山</option>
+                <!-- <option value="2">未実装</option>
+                <option value="3">未実装</option> -->
               </select>
               </td></tr>
               <tr><th>Character Select</th></tr>
@@ -84,32 +97,42 @@ $stmt = null;
                   </tr>
                   <tr>
                     <td><?php if($lost_a == 0): ?>
-                      <img src="images/chara_a1.png" alt="キャラ（A）"><?php else: ?>
-                      <img src="images/chara_a0.png" alt="キャラ（A）"><?php endif; ?>
+                      <img src="images/chara_a1.png" alt="キャラ画像（新城）"><?php else: ?>
+                      <img src="images/chara_a0.png" alt="キャラ画像（新城）"><?php endif; ?>
                     </td>
 
                     <td><?php if($lost_t == 0): ?>
-                      <img src="images/chara_t1.png" alt="キャラ（T）"><?php else: ?>
-                      <img src="images/chara_t0.png" alt="キャラ（T）"><?php endif; ?>
+                      <img src="images/chara_t1.png" alt="キャラ画像（蘆野）"><?php else: ?>
+                      <img src="images/chara_t0.png" alt="キャラ画像（蘆野）"><?php endif; ?>
                     </td>
 
                     <td><?php if($lost_m == 0): ?>
-                      <img src="images/chara_m1.png" alt="キャラ（M）"><?php else: ?>
-                      <img src="images/chara_m0.png" alt="キャラ（M）"><?php endif; ?>
+                      <img src="images/chara_m1.png" alt="キャラ画像（狩場）"><?php else: ?>
+                      <img src="images/chara_m0.png" alt="キャラ画像（狩場）"><?php endif; ?>
                     </td>
 
                     <td><?php if($lost_y == 0): ?>
-                      <img src="images/chara_y1.png" alt="キャラ（Y）"><?php else: ?>
-                      <img src="images/chara_y0.png" alt="キャラ（Y）"><?php endif; ?>
+                      <img src="images/chara_y1.png" alt="キャラ画像（赤羽）"><?php else: ?>
+                      <img src="images/chara_y0.png" alt="キャラ画像（赤羽）"><?php endif; ?>
                     </td>
                   </tr>
                   <tr>
-                    <!-- DBからスキル情報を取得して表示する！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 壊れたラジオ</p><p class="skill_d">接敵前に回避行動が可能<br>（リキャスト5T）</p></td>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 錆びた鉄パイプ</p><p class="skill_d">HP消費でゴースト以外撃破<br>（常時発動）</p></td>
-                    <!-- DBからスキル情報を取得して表示する！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
+                    <td>
+                      <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[1]; ?></p>
+                      <p class="skill_d"><?php echo $skill_effectarr[1]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                    </td>
+                    <td>
+                      <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[2]; ?></p>
+                      <p class="skill_d"><?php echo $skill_effectarr[2]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                    </td>
+                    <td>
+                      <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[3]; ?></p>
+                      <p class="skill_d"><?php echo $skill_effectarr[3]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                    </td>
+                    <td>
+                      <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[4]; ?></p>
+                      <p class="skill_d"><?php echo $skill_effectarr[4]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                    </td>
                   </tr>
                   <tr>
                     <td><?php if($lost_a == 0): ?>

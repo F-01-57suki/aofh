@@ -46,8 +46,10 @@ else:
   //ターンイベントの抽選（接敵フラグorアイテム）
   //接敵フラグの判定
   if($enemies_flg == 1):
+    $firstmessage = 0;
     //接敵イベントをセット
     if($enemy_id == 0):
+      $firstmessage = 1;
       //敵を抽選し、セーブにセット
       require_once "tmp/enemy_set.php";
     endif;
@@ -85,7 +87,13 @@ else:
           <button type="submit" name="battle" value="speed" class="action_btn">逃げる</button><br>
         </form>
       </div>
-      <div><p>異質な気配が近付く……。<br><span class="system_span">SAN値が<?php echo $_SESSION["add_fear"]; ?>減少。</span></p></div>
+      <div>
+        <?php if($firstmessage == 1): ?>
+        <p>異質な気配が近付く……。<br><span class="system_span">SAN値が<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <?php else: ?>
+        <p>二度目のメッセージかんがえちゅう</p>
+        <?php endif; ?>
+      </div>
     </main>
     <?php
   else:
