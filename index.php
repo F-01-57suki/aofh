@@ -31,8 +31,28 @@ $lost = 4-($result["lost_a"]+$result["lost_t"]+$result["lost_m"]+$result["lost_y
 $news = $result["news"];
 $stmt = null;
 
-//クリア状況を取得
-//マップごとに集計、クリアデータ１つでもあればクリアカウント
+//クリア状況
+//マップ数を取得
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM `map_tbl`");
+$stmt->execute();
+$result = $stmt->fetchColumn();
+$map_count = $result;
+$stmt = null;
+//マップごとクリアデータ１つでもあればカウント
+$i = 1;
+$clear_count = 0;
+while($i <= $map_count):
+  $stmt = $pdo->prepare("SELECT `clear_id` FROM `clear_save_tbl` WHERE `username`=:username and `map_id`=:map_id");
+  $stmt->bindParam(":username",$_SESSION["username"]);
+  $stmt->bindParam(":map_id",$i);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  if($result):
+    $clear_count++;
+  endif;
+  $stmt = null;
+  $i++;
+endwhile;
 
 //ランキングの取得
 //考え中・・・・（自分の順位を取得できるか？できなければマップごと一位のみ
@@ -57,7 +77,7 @@ $stmt = null;
             <li><a href="start.php">Start</a></li>
             <li><a href="continue.php" id="contli">Continue<span id="contspn"><i class="fas fa-exclamation-triangle"></i> 進行中</span></a></li>
             <li><a href="shop.php">Shop</a></li>
-            <li><a href="logout.php">Exit</a></li>
+            <li><a href="#" id="exit">Exit</a></li>
           </ul>
         </nav>
       </header>
@@ -72,7 +92,7 @@ $stmt = null;
               <dt><i class="fas fa-heartbeat"></i> 生存キャラ</dt>
               <dd><i class="fas fa-ellipsis-h"></i> <?php echo $lost; ?>/4</dd>
               <dt><i class="fas fa-eye"></i> クリア状況</dt>
-              <dd><i class="fas fa-ellipsis-h"></i> 1/3</dd>
+              <dd><i class="fas fa-ellipsis-h"></i> <?php echo $clear_count; ?>/<?php echo $map_count; ?></dd>
             </dl>
             <h2 class="h2nplus2">総合ランキング</h2>
             <table>
@@ -115,6 +135,17 @@ $stmt = null;
       if(contflag == 1){
         contli.style.textShadow = "0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0)";
         contspn.style.display = "block";
+      }else{
+        contli.onclick = function(){
+          alert("セーブがありません。新規セーブを作成してください。");
+        }
+      }
+      const exit = document.getElementById("exit");
+      exit.onclick = function(){
+        exityn = confirm("ログアウトしてよろしいですか？");
+        if(exityn == true){
+          location.href = "logout.php";
+        }
       }
     </script>
   </body>

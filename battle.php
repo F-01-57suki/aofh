@@ -26,10 +26,6 @@ if($_POST["battle"] == "kill"):
     $now_sp = $result["now_sp"];
     $panic_flg = $result["panic_flg"];
     $stmt = null;
-    //ゲームオーバー判定
-    if($now_ap <= 0):
-      header('Location: failed.php');
-    endif;
     require_once "tmp/battle_end.php";
     ?>
       <p>倒したよ</p>
@@ -105,10 +101,6 @@ elseif($_POST["battle"] == "stealth"):
     $now_sp = $result["now_sp"];
     $panic_flg = $result["panic_flg"];
     $stmt = null;
-    //ゲームオーバー判定
-    if($now_ap <= 0):
-      header('Location: failed.php');
-    endif;
     //パニック判定
     if($now_sp <= 0 and $panic_flg == 0)://SPが0になった
       //パニックON、ペナルティでSPに-3
@@ -188,10 +180,6 @@ elseif($_POST["battle"] == "speed"):
     $now_sp = $result["now_sp"];
     $panic_flg = $result["panic_flg"];
     $stmt = null;
-    //ゲームオーバー判定
-    if($now_ap <= 0):
-      header('Location: failed.php');
-    endif;
     //パニック判定
     if($now_sp <= 0 and $panic_flg == 0)://SPが0になった
       //パニックON、ペナルティでSPに-3

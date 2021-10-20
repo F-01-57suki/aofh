@@ -14,18 +14,16 @@
       </header>
       <main>
         <div>
-          <p>　キャラ名描写の確認です。選択キャラは「<?php echo $charaarr[$chara_id]; ?>」。</p>
+          <p>　キャラ名描写の確認です。選択キャラは「<?php echo $chara_name; ?>」。</p>
           <p>　キャラごとのテキスト確認です。<?php
-          if($chara_id == 0):
+          if($chara_id == 1):
             echo "あーさん！";
-          elseif($chara_id == 1):
-            echo "ね～～さん！";
           elseif($chara_id == 2):
-            echo "チャンミラ！";
+            echo "ね～～さん！";
           elseif($chara_id == 3):
+            echo "チャンミラ！";
+          elseif($chara_id == 4):
             echo "赤ずきんの傭兵をすこれ";
-          else:
-            die("エラーが発生しました");
           endif;
           ?></p>
           <p>　きさらぎ駅とは、日本のインターネットコミュニティで都市伝説として語られている架空の鉄道駅である。</p>

@@ -127,7 +127,7 @@ endif;
       </header>
       <main>
         <div>
-          <img src="images/turn_t_n.png" alt="選択キャラクター">
+          <img src="images/t_hutuu.png" alt="選択キャラクター画像">
 <?php
 //////////////////////////////////////////
 /*キャラ分画像が出来たら、imgタグの出し分け

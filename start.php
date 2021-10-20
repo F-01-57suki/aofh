@@ -38,6 +38,15 @@ if($result):
 <?php
 else:
 $stmt = null;
+//マップの取得
+$map_namearr = array();
+$stmt = $pdo->prepare("SELECT `map_id`,`map_name` FROM `map_tbl`");
+$stmt->execute();
+while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
+  $mapkey = $result["map_id"];
+  $map_namearr[$mapkey] = $result["map_name"];
+endwhile;
+$stmt = null;
 //スキルの取得
 $skill_namearr = array();
 $skill_effectarr = array();
@@ -50,7 +59,7 @@ while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
   $skill_effectarr[$chara_id] = $result["skill_effect"];
   $skill_recastarr[$chara_id] = $result["skill_recast"];
 endwhile;
-
+$stmt = null;
 //キャラデータの確認
 $stmt = $pdo->prepare("SELECT `lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
@@ -73,6 +82,7 @@ $stmt = null;
     <div id="wrapper">
       <header>
         <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
+        <p>‐選択して下さい‐</p>
       </header>
       <main>
         <div>
@@ -81,9 +91,9 @@ $stmt = null;
             <tr><th>Stage Select</th></tr>
               <tr><td>
                 <select name="stage">
-                <option value="1">きさらぎ駅</option>
-                <!-- <option value="2">未実装</option>
-                <option value="3">未実装</option> -->
+                <?php foreach($map_namearr as $key => $value): ?>
+                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                <?php endforeach; ?>
               </select>
               </td></tr>
               <tr><th>Character Select</th></tr>
@@ -153,7 +163,11 @@ $stmt = null;
                   </tr>
                 </table>
               </td></tr>
-              <tr><td colspan="2" id="btn"><input type="submit" value="確認画面へ" class="btnstyle"></td></tr>
+              <tr>
+                <td colspan="2" id="btn">
+                  <input type="submit" value="確認画面へ" class="btnstyle">
+                </td>
+              </tr>
             </table>
           </form>
         </div>

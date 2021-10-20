@@ -2,10 +2,44 @@
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
-require_once "tmp/charaarr.php";
 
-//ポイントを差し引き
-$stmt = $pdo->prepare("UPDATE `user_tbl` SET `point`=`point`-10 WHERE `username`=:username");
+//選択せずボタンを押した際は弾く
+if(!isset($_POST["reborn"])):
+  header('Location: shop.php');
+  die();
+endif;
+
+//リロード対策
+$stmt = $pdo->prepare("SELECT `lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
+$stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$lost_a = $result["lost_a"];
+$lost_t = $result["lost_t"];
+$lost_m = $result["lost_m"];
+$lost_y = $result["lost_y"];
+$lostarr = array(null,$lost_a,$lost_t,$lost_m,$lost_y);
+$stmt = null;
+$lostkey = $_POST["reborn"];
+if($lostarr[$lostkey] == 0):
+  header('Location: shop.php');
+  die();
+endif;
+
+//商品の取得
+$stmt = $pdo->prepare("SELECT `sell_name`,`sell_price` FROM `shop_tbl` WHERE `sell_id`=:sell_id");
+$stmt->bindParam(":sell_id",$_POST["reborn"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$sell_name = $result["sell_name"];
+$sell_price = $result["sell_price"];
+$stmt = null;
+
+//ポイントを差し引きとニュース入れ込み
+$news = "reborn_c".$_POST["reborn"];
+$stmt = $pdo->prepare("UPDATE `user_tbl` SET `point`=`point`-:point,`news`=:news WHERE `username`=:username");
+$stmt->bindParam(":point",$sell_price);
+$stmt->bindParam(":news",$news);
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
@@ -31,7 +65,29 @@ $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
 ?>
-<p>現在の所持ポイント：<?php echo $point; ?></p>
-<p><?php echo $charaarr[$_POST["reborn"]]; ?>が選択可能になりました。</p>
-
-<a href="index.php">TOP画面へ</a>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>AVACHIofHORROR（仮）</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  </head>
+  <body id="shop">
+    <div id="wrapper">
+      <header>
+        <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
+        <p>‐購入完了‐</p>
+      </header>
+      <main>
+        <div>
+        <p id="nowp"><i class="fas fa-coins"></i> 所持ポイント <i class="fas fa-ellipsis-h"></i> <?php echo $point; ?>ｐ</p>
+        <p><?php echo $sell_price; ?>ポイントを消費し、<?php echo $sell_name; ?>しました。</p>
+        <a href="shop.php">もどる</a>
+        </main>
+      <footer>
+        <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
+      </footer>
+    </div>
+  </body>
+</html>

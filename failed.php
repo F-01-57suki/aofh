@@ -1,7 +1,7 @@
 <?php
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
-
+/*
 //セーブデータを取得
 $stmt = $pdo->prepare("SELECT `map_id`,`chara_id` FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
@@ -39,8 +39,41 @@ $stmt = $pdo->prepare("DELETE FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
-
-//TOP画面へ戻る
+*/
 ?>
-<p>ゲームオーバー</p>
-<a href="index.php">TOP画面へ</a>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>AVACHIofHORROR（仮）</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  </head>
+  <body id="shop">
+    <div id="wrapper">
+      <header>
+        <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
+        <p>‐ゲームオーバー‐</p>
+      </header>
+      <main>
+        <div>
+          <h2>今回のスコア</h2>
+          <table>
+            <tr>
+              <th>総ターン数：</th><td>ほにゃ</td>
+            </tr>
+            <tr>
+              <th>進んだ距離：</th><td>ほにゃ/ほにゃ</td>
+            </tr>
+          </table>
+          <p class="shop_nop">「キャラ名」が使用不可になりました。</p>
+          <p>※ショップでポイントを支払って復活できます。</p>
+          <a href="start.php">もう一度挑戦する</a>
+        </div>
+      </main>
+      <footer>
+        <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,6 @@
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
-require_once "tmp/maparr.php";
 
 //選択なければエラー
 if(!isset($_POST["chara"]) or !isset($_POST["stage"])):
@@ -46,6 +45,22 @@ if($result):
 <?php
 endif;
 $stmt = null;
+//マップの取得
+$stmt = $pdo->prepare("SELECT `map_name` FROM `map_tbl` WHERE `map_id`=:map_id");
+$stmt->bindParam(":map_id",$_POST["stage"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$map_name = $result["map_name"];
+$stmt = null;
+//スキルの取得
+$stmt = $pdo->prepare("SELECT `skill_name`,`skill_effect`,`skill_recast` FROM `skill_tbl` WHERE `chara_id`=:chara_id");
+$stmt->bindParam(":chara_id",$_POST["chara"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$skill_name = $result["skill_name"];
+$skill_effect = $result["skill_effect"];
+$skill_recast = $result["skill_recast"];
+$stmt = null;
 //キャラデータの確認
 $stmt = $pdo->prepare("SELECT `lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
@@ -80,7 +95,7 @@ endif;
           <form action="start_done.php" method="post">
             <table>
             <tr><th>Stage</th></tr>
-              <tr><td><?php echo $maparr[$_POST["stage"]]; ?></td></tr>
+              <tr><td><?php echo $map_name; ?></td></tr>
               <tr><th>Character</th></tr>
               <tr><td id="charaSelect">
                 <table>
@@ -109,15 +124,7 @@ endif;
                     </td>
                   </tr>
                   <tr>
-                    <?php if($_POST["chara"] == 1): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 壊れたラジオ</p><p class="skill_d">接敵前に回避行動が可能<br>（リキャスト5T）</p></td>
-                    <?php elseif($_POST["chara"] == 2): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 古びたカメラ</p><p class="skill_d">ゴーストを祓ってSP回復<br>（リキャスト5T）</p></td>
-                    <?php elseif($_POST["chara"] == 3): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 茉莉花の髪飾り</p><p class="skill_d">接敵時、逃走確率が上昇<br>（常時発動）</p></td>
-                    <?php elseif($_POST["chara"] == 4): ?>
-                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> 錆びた鉄パイプ</p><p class="skill_d">HP消費でゴースト以外撃破<br>（常時発動）</p></td>
-                    <?php endif; ?>
+                    <td><p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_name; ?></p><p class="skill_d"><?php echo $skill_effect; ?><br>（リキャスト<?php echo $skill_recast; ?>T）</p></td>
                   </tr>
                 </table>
               </td></tr>

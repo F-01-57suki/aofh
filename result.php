@@ -1,4 +1,5 @@
 <?php
+/*
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
 
@@ -99,5 +100,43 @@ echo "あなたのランクは、「",$rank,"」でした！<br>ポイントを"
 //「$rank」ごとに画像を変える。加算ポイントのテキストは「$addp」を表示
 //リザルトの後にエピローグ
 //クリックでindexに飛ぶ
+*/
 ?>
-<a href="index.php">TOP画面へ</a>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>AVACHIofHORROR（仮）</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  </head>
+  <body id="shop">
+    <div id="wrapper">
+      <header>
+        <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
+        <p>‐ステージクリア‐</p>
+      </header>
+      <main>
+        <div>
+          <h2>今回のスコア</h2>
+          <table>
+            <tr>
+              <td colspan="2"><img src="images/rank_s.png" alt="今回のランク"></td>
+            </tr>
+            <tr>
+              <th>総ターン数：</th><td>ほにゃ</td>
+            </tr>
+            <tr>
+              <th>獲得ポイント：</th><td>ほにゃ</td>
+            </tr>
+          </table>
+          <p>おめでとうございます！</p>
+          <a href="index.php">TOPへ戻る</a>
+        </div>
+      </main>
+      <footer>
+        <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
+      </footer>
+    </div>
+  </body>
+</html>
