@@ -1,3 +1,7 @@
+# テストアカウント（操作OK）
+- アカウント名：TestUser2021
+- パスワード　：TestPass2021
+
 # ざっくり仕様書
 https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1U08/edit?usp=sharing
 - テーブル構成
@@ -5,8 +9,10 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
   - マップ一覧、敵一覧を作成予定…
 
 # 現在の進捗
-- 基本の流れを一通り作成、ページの成形へ
-- スキルやショップは後回しで実装中
+- 一通りのゲームの流れ（済）
+
+## 着手中
+- リザルト、ゲームオーバー画面のHTML/CSS
 
 # 今後の実装予定
 - バトル中のパニック処理
