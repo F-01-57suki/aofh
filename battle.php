@@ -1,7 +1,6 @@
 <?php
 ///////////////////////////////////////////////////////////
 //パニック時の処理（キャラステ半減を予定）は未実装
-//後で消すを消す
 ///////////////////////////////////////////////////////////
 
 require_once "tmp/post.php";
@@ -69,11 +68,6 @@ elseif($_POST["battle"] == "stealth"):
   //キャラのステルスから敵の賢さを引き、判定へ
   $stealth_check = ($_SESSION["chara_stealth"])-($_SESSION["enemy_wisdom"]);
   $stealth_lottery = mt_rand(1,10);
-
-  ///////////////////////////////////////////////////////
-  //後で消す
-  echo 'キャラステ',$_SESSION["chara_stealth"],'敵ステ',$_SESSION["enemy_wisdom"],'<br><br>stealth_check：',$stealth_check,'<br><br>stealth_lottery：',$stealth_lottery,'<br><br>';
-  ///////////////////////////////////////////////////////
 
   //lotteryがcheck以下なら成功
   if($stealth_lottery <= $stealth_check):
@@ -148,11 +142,6 @@ elseif($_POST["battle"] == "speed"):
   //キャラの速度から敵の速度を引き、判定へ
   $speed_check = ($_SESSION["chara_speed"])-($_SESSION["enemy_speed"]);
   $speed_lottery = mt_rand(1,10);
-
-  ///////////////////////////////////////////////////////
-  //後で消す
-  echo 'キャラ速度',$_SESSION["chara_speed"],'敵速度',$_SESSION["enemy_speed"],'<br><br>speed_check：',$speed_check,'<br><br>speed_lottery：',$speed_lottery,'<br><br>';
-  ///////////////////////////////////////////////////////
 
   //lotteryがcheck以下なら成功
   if($speed_lottery <= $speed_check):

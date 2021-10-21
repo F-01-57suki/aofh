@@ -112,7 +112,6 @@ else:
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;
-        echo "<br>接敵フラグ＋１<br>";//////////////////////////////////////////////////////けす
       endif;
     endif;
     //接敵イベントなければイベント抽選（パニック時どうするか未定・・・・・・・・・・・・
