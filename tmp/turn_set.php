@@ -23,11 +23,13 @@ else:
 endif;
 
 //マップの取得
-$stmt = $pdo->prepare("SELECT `map_size` FROM `map_tbl` WHERE `map_id`=:map_id");
+$stmt = $pdo->prepare("SELECT `map_size`,`enemy_rand`,`event_rand` FROM `map_tbl` WHERE `map_id`=:map_id");
 $stmt->bindParam(":map_id",$map_id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 $map_size = $result["map_size"];
+$enemy_rand = $result["enemy_rand"];
+$event_rand = $result["event_rand"];
 $stmt = null;
 //全体（map_size）から進み（now_adv）を引いて、残り取得
 $map_remain = $map_size - $now_adv;
