@@ -4,7 +4,7 @@
 
 # ざっくり仕様書
 https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1U08/edit?usp=sharing
-- テーブル構成
+- DBのテーブル構成
 - キャラ/スキル一覧
   - マップ一覧、敵一覧を作成予定…
 
