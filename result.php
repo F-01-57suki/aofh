@@ -1,5 +1,4 @@
 <?php
-/*
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
 
@@ -96,11 +95,9 @@ $stmt->execute();
 $stmt = null;
 
 //評価の表示とエピローグ
-echo "あなたのランクは、「",$rank,"」でした！<br>ポイントを",$addp,"獲得しました。";
 //「$rank」ごとに画像を変える。加算ポイントのテキストは「$addp」を表示
 //リザルトの後にエピローグ
 //クリックでindexに飛ぶ
-*/
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -110,7 +107,7 @@ echo "あなたのランクは、「",$rank,"」でした！<br>ポイントを"
     <link href="style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
-  <body id="shop">
+  <body id="result">
     <div id="wrapper">
       <header>
         <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
@@ -121,16 +118,16 @@ echo "あなたのランクは、「",$rank,"」でした！<br>ポイントを"
           <h2>今回のスコア</h2>
           <table>
             <tr>
-              <td colspan="2"><img src="images/rank_s.png" alt="今回のランク"></td>
+              <td colspan="2"><img src="images/rank_<?php echo $rank; ?>.png" alt="<?php echo $rank; ?>ランク獲得"></td>
             </tr>
             <tr>
-              <th>総ターン数：</th><td>ほにゃ</td>
+              <th>総ターン数：</th><td><?php echo $now_turn; ?></td>
             </tr>
             <tr>
-              <th>獲得ポイント：</th><td>ほにゃ</td>
+              <th>獲得ポイント：</th><td><?php echo $addp; ?></td>
             </tr>
           </table>
-          <p>おめでとうございます！</p>
+          <p>クリアランクに応じたポイントが加算されました。</p>
           <a href="index.php">TOPへ戻る</a>
         </div>
       </main>

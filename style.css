@@ -653,9 +653,11 @@ footer{
   display: flex;
   justify-content: center;
 }
-table,tbody{
+
+#shop table,tbody{
   width: 100%;
 }
+
 #shop th{
   padding-top: 10px;
   font-size: 1.8rem;
@@ -676,8 +678,81 @@ table,tbody{
   font-weight: bold;
 }
 
+/*-* リザルト *-*-*-*-*-*-*-*-*-*-*-*/
+#result h1{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
 
-/*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
+#result h2{
+  margin-top: 20px;
+  text-align: right;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+#result header>p{
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+
+#result p{
+  margin-top: 20px;
+}
+
+#result a{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+#result a:hover{
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+
+#result #nowp{
+  border-radius: 15px;
+  margin: 0 auto;
+  padding: 5px 10px;
+  width: fit-content;
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255,0.8);
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+#result main{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#result table,tbody{
+  width: 100%;
+}
+
+#result th{
+  width: 50%;
+  text-align: end;
+  padding-top: 10px;
+  font-size: 1.8rem;
+}
+#result td{
+  padding-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
 /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
 /*-* ページ名 *-*-*-*-*-*-*-*-*-*-*-*/
 
