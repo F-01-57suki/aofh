@@ -100,14 +100,14 @@ else:
     //接敵フラグを抽選、当たれば加算。
     $enemies_lottery = mt_rand(1,10);
     if($panic_flg):
-      if($enemies_lottery <= 8)://確率80％（マップごとの確率を倍とかの方がいいかも
+      if($enemies_lottery <= ($enemy_rand+1))://通常確率の10%増
         $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `enemies_flg`=1 WHERE `username`=:username");
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;
       endif;
     else:
-      if($enemies_lottery <= 3)://確率30％！！！！！！！！マップごとに確率もってDBから持ってきたい
+      if($enemies_lottery <= $enemy_rand)://マップごとDBに持っている確率
         $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `enemies_flg`=1 WHERE `username`=:username");
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
@@ -116,7 +116,7 @@ else:
     endif;
     //接敵イベントなければイベント抽選（パニック時どうするか未定・・・・・・・・・・・・
     $event_lottery = mt_rand(1,10);
-    if($event_lottery <= 3)://確率30％！！！！！！！！マップごとに確率もってDBから持ってきたい
+    if($event_lottery <= $event_rand)://マップごとDBに持っている確率
       require_once "tmp/event.php";
     else:
       //パニックなら操作不能
