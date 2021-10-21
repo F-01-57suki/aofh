@@ -596,6 +596,23 @@ footer{
   text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
 }
 
+/*-* イベント *-*-*-*-*-*-*-*-*-*-*-*/
+.eve_h2{
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+  text-align: center;
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.eve_span{
+  font-size: 1.6rem;
+}
+
+.eve_p{
+  margin-top: 20px;
+}
+
 /*-* ショップ *-*-*-*-*-*-*-*-*-*-*-*/
 #shop h1{
   display: flex;
