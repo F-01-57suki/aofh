@@ -12,7 +12,10 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- ゲーム部分の画面CSS
+1. イベントの中身を書く
+2. ゲーム部分の画面CSS
+3. ゲーム画面のキャラ画像（作成して処理書く）
+
 
 # 今後の実装予定
 - バトル中のパニック処理
