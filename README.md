@@ -16,6 +16,8 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 2. ゲーム部分の画面CSS
 3. ゲーム画面のキャラ画像（作成して処理書く）
 
+## 確認済みの不具合
+- イベントによる進捗増で、残距離を超えマイナスに突入
 
 # 今後の実装予定
 - バトル中のパニック処理
