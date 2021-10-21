@@ -12,7 +12,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- リザルト、ゲームオーバー画面のHTML/CSS
+- ゲーム部分の画面CSS
 
 # 今後の実装予定
 - バトル中のパニック処理
@@ -24,3 +24,5 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 初回ログイン時のチュートリアル
 - ランキング処理
 - ショップ（キャラ強化・着替えの追加）
+- ゲームバランスの調整
+- マップの追加
