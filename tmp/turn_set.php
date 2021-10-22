@@ -114,7 +114,7 @@ endif;
           </div>
           <div id="info">
             <p>
-              ＴＵＲＮ‐ <span id="now_turn"><?php echo $now_turn; ?></span>
+              ＴＵＲＮ&emsp;<span id="now_turn"><?php echo $now_turn; ?></span>
             </p>
             <p>
               <i class="fas fa-heartbeat fa-fw"></i> ＡＰ：<span id="now_ap"><?php echo $now_ap; ?></span>
@@ -128,28 +128,16 @@ endif;
         </div>
       </header>
       <main>
-        <div>
-          <img src="images/t_hutuu.png" alt="選択キャラクター画像">
+        <div id="contwrap">
 <?php
-//////////////////////////////////////////
-/*キャラ分画像が出来たら、imgタグの出し分け
-if($chara_id == 1):
-  if($panic_flg == 1):
-    //パニック中
-    <img src="images/ほにゃ" alt="選択キャラクター（パニック中）">
-  elseif($enemy_id != 0):
-    //接敵中
-    <img src="images/ほにゃ" alt="選択キャラクター（接敵中）">
-  else:
-    //通常時
-    <img src="images/ほにゃ" alt="選択キャラクター">
-  endif;
-elseif($chara_id == 2):
-elseif($chara_id == 3):
-elseif($chara_id == 4):
+if($panic_flg == 1):
+  //パニック中
+  ?><img src="images/panik_<?php echo $chara_id; ?>.png" alt="選択キャラクター（パニック中）" id="charaimg"><?php
+elseif($enemy_id != 0):
+  //接敵中
+  ?><img src="images/dkdk_<?php echo $chara_id; ?>.png" alt="選択キャラクター（接敵中）" id="charaimg"><?php
 else:
-  die("エラーです");
+  //通常時
+  ?><img src="images/hutu_<?php echo $chara_id; ?>.png" alt="選択キャラクター" id="charaimg"><?php
 endif;
-*/
-//////////////////////////////////////////
 ?>
