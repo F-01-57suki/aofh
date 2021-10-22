@@ -22,9 +22,11 @@ if($action_flg):
   else:
   //行動選択画面を表示
   ?>
-        <form action="action.php" method="post" id="action">
-          <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
-          <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
+        <section>
+          <h2 class="eve_h2">‐行動を選択‐</span></h2>
+          <form action="action.php" method="post" id="action">
+            <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
+            <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
   <?php
     $stmt = $pdo->prepare("SELECT `now_adv` FROM `user_save_tbl` WHERE `username`=:username");
     $stmt->bindParam(":username",$_SESSION["username"]);
@@ -32,12 +34,13 @@ if($action_flg):
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if($result["now_adv"] >= 1):
     ?>
-          <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
+            <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
     <?php
     endif;
   $stmt = null;
   ?>
-        </form>
+          </form>
+        </section>
       </div>
     </main>
   <?php
@@ -52,6 +55,12 @@ else:
       $firstmessage = 1;
       //敵を抽選し、セーブにセット
       require_once "tmp/enemy_set.php";
+?>
+<script>
+  const charaimg = document.getElementById("charaimg");
+  charaimg.src = "images/dkdk_<?php echo $chara_id; ?>.png";
+</script>
+<?php
     endif;
     //敵パラメータを取得
     $stmt = $pdo->prepare("SELECT `enemy_name`,`enemy_type`,`enemy_speed`,`enemy_wisdom`,`add_damage`,`add_fear` FROM `enemy_tbl` WHERE `enemy_id`=:enemy_id");
@@ -71,6 +80,7 @@ else:
     $stmt = null;
     ?>
         <form action="battle.php" method="post" id="action">
+        <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
     <?php
     if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
       ?>
@@ -141,9 +151,11 @@ else:
       $stmt->execute();
       $stmt = null;
       ?>
-        <form action="action.php" method="post" id="action">
-          <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
-          <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
+      <section>
+        <h2 class="eve_h2">‐行動を選択‐</span></h2>
+          <form action="action.php" method="post" id="action">
+            <button type="submit" name="action" value="move" class="action_btn">先へ進む</button><br>
+            <button type="submit" name="action" value="rest" class="action_btn">休憩する</button><br>
       <?php
         $stmt = $pdo->prepare("SELECT `now_adv` FROM `user_save_tbl` WHERE `username`=:username");
         $stmt->bindParam(":username",$_SESSION["username"]);
@@ -151,12 +163,13 @@ else:
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if($result["now_adv"] >= 1):
       ?>
-          <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
+            <button type="submit" name="action" value="return" class="action_btn">道を戻る</button><br>
       <?php
       endif;
       $stmt = null;
       ?>
-        </form>
+          </form>
+        </section>
       </div>
     </main>
       <?php

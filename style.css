@@ -500,15 +500,28 @@ footer{
   text-align: center;
 }
 
+#contwrap{
+  margin: 0 auto;
+  width: 70%;
+}
+
+#contwrap>section,#contwrap>div,#contwrap>form{
+  width: 50%;
+}
+
+#contwrap>img{
+  margin-right: 5%;
+  width: 45%;
+  height: 45%;
+}
+
+#contwrap form{
+  text-align: center;
+}
 #turn main>div{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-}
-#turn main>div>img{
-  margin-right: 100px;
-  width: 30%;
-  height: 30%;
 }
 
 #info{
@@ -588,6 +601,9 @@ footer{
 }
 
 .next_turn{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
   color: rgb(255, 255, 255);
   text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
 }
@@ -598,11 +614,21 @@ footer{
 
 /*-* イベント *-*-*-*-*-*-*-*-*-*-*-*/
 .eve_h2{
+  margin-bottom: 30px;
   color: rgb(255, 255, 255);
   text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
   text-align: center;
   font-size: 2.8rem;
   line-height: 1;
+}
+.ng{
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+.ok{
+  text-shadow: 0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153);
+}
+.sp{
+  text-shadow: 0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0),0 0 3px rgb(153, 153, 0);
 }
 
 .eve_span{

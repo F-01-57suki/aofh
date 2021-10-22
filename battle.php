@@ -7,6 +7,10 @@ require_once "tmp/post.php";
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
 require_once "tmp/turn_set.php";
+if(!isset($_SESSION["enemy_name"])):
+  header('Location: index.php');
+  die();
+endif;
 
 //撃破（赤羽かつ、非ゴーストのみ）
 if($_POST["battle"] == "kill"):
@@ -26,9 +30,13 @@ if($_POST["battle"] == "kill"):
     $now_sp = $result["now_sp"];
     $panic_flg = $result["panic_flg"];
     $stmt = null;
+    $add_damage = $_SESSION["add_damage"];
     require_once "tmp/battle_end.php";
     ?>
-      <p>倒したよ</p>
+      <section>
+        <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
+        <p class="eve_p">実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -51,7 +59,10 @@ elseif($_POST["battle"] == "purify"):
     $stmt = null;
     require_once "tmp/battle_end.php";
     ?>
-      <p>お祓いしたよ</p>
+      <section>
+        <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐古びたカメラ‐</span></h2>
+        <p class="eve_p">相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -73,7 +84,10 @@ elseif($_POST["battle"] == "stealth"):
   if($stealth_lottery <= $stealth_check):
     require_once "tmp/battle_end.php";
     ?>
-      <p>隠れたよ</p>
+      <section>
+        <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
+        <p class="eve_p">物陰に隠れ、息を殺してじっと待つ。不気味な気配は暫く周囲を探していたようだが、――やがて諦めたのか、どこかへと去っていった……。</p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -127,7 +141,10 @@ elseif($_POST["battle"] == "stealth"):
       $stmt = null;
     endif;
     ?>
-      <p>咄嗟に隠れるも、すぐに見つかってしまった。<br><span class="system_span">回避に失敗し、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+      <section>
+        <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
+        <p>咄嗟に隠れるも、すぐに見つかってしまった。<br><span class="system_span">怪異との接触により、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -147,7 +164,10 @@ elseif($_POST["battle"] == "speed"):
   if($speed_lottery <= $speed_check):
     require_once "tmp/battle_end.php";
     ?>
-      <p>逃げたよ</p>
+      <section>
+        <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
+        <p>考えるよりも先に、体が動いていた。無我夢中で走っていた。<br>そして、――やがて疲れて立ち止まると、もう不気味な気配は追ってきていなかった。</p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -201,7 +221,10 @@ elseif($_POST["battle"] == "speed"):
       $stmt = null;
     endif;
     ?>
-      <p>走って逃げるも、すぐに追いつかれてしまった。<br><span class="system_span">回避に失敗し、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+      <section>
+        <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
+        <p>走って逃げるも、すぐに追いつかれてしまった。<br><span class="system_span">怪異との接触により、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+      </section>
     </div>
     <div>
       <a href="turn.php" class="next_turn">次のターンへ</a>

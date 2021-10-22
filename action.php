@@ -30,7 +30,8 @@ if($_POST["action"] == "rest"):
   $stmt->execute();
   $stmt = null;
   ?>
-  <p><br>少し休憩した</p><br>
+  <h2 class="eve_h2 ok">‐休憩‐</span></h2>
+  <p>歩き通しはやはり疲れる。<br>道の端に落ち着ける場所を見つけたので、少し休憩した。</p>
   <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 elseif($_POST["action"] == "move"):
@@ -40,7 +41,8 @@ elseif($_POST["action"] == "move"):
   $stmt->execute();
   $stmt = null;
   ?>
-  <p><br>先へ進んだ</p><br>
+  <h2 class="eve_h2 ok">‐進む‐</span></h2>
+  <p>一刻も早く、ここから脱出しなければ。<br>周囲を警戒しながら、恐る恐る暗闇の先へと進んだ。</p>
   <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 else:
@@ -50,7 +52,8 @@ else:
   $stmt->execute();
   $stmt = null;
   ?>
-  <p><br>来た道を戻った</p><br>
+  <h2 class="eve_h2 ok">‐戻る‐</span></h2>
+  <p>――嫌な予感がした。こういった予感、直感というのは、よく当たるものだ。<br>急いては事を仕損じる。焦る気持ちをぐっと堪え、来た道を戻った。</p>
   <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 endif;
