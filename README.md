@@ -20,6 +20,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - イベントによる進捗増で、残距離を超えマイナスに突入
 
 # 今後の実装予定
+- イベントごとに発生確率を設定できるようにする
 - バトル中のパニック処理
 - HP/SPの回復上限
 - マップ背景（map_idで変化）
