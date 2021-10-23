@@ -103,7 +103,7 @@ endif;
       let enemy_id = <?php echo $enemy_id; ?>;
     </script>
   </head>
-  <body id="turn">
+  <body id="turn" class="map<?php echo $map_id; ?>">
     <div id="wrapper">
       <header>
         <div>

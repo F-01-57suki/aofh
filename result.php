@@ -107,7 +107,7 @@ $stmt = null;
     <link href="style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
-  <body id="result">
+  <body id="result" class="map<?php echo $map_id; ?>">
     <div id="wrapper">
       <header>
         <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
