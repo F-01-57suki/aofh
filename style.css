@@ -612,6 +612,33 @@ footer{
   text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
 }
 
+#turn #battle_ui{
+  margin: 10px 0 20px;
+  padding: 10px 0 20px;
+  text-align: center;
+  display: none;
+  background-image: url(images/enemy.jpg);
+  background-size:cover;
+}
+#turn #battle_ui>#battle_h{
+  font-size: 2.5rem;
+  color: rgb(153, 153, 153);
+  text-shadow: 0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0),0 0 3px rgb(0, 0, 0);
+}
+#turn #battle_ui>#battle_h>span{
+  font-size: 3.2rem;
+  color: rgb(204, 204, 204);
+  text-shadow: 0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0),0 0 3px rgb(153, 0, 0);
+}
+#turn #battle_ui>#battle_p{
+  margin-top: 20px;
+  color: rgb(51, 51, 51);
+  text-shadow: 0 0 3px rgb(255, 255, 255);
+  font-style: italic;
+  font-weight: bold;
+}
+
+
 /*-* イベント *-*-*-*-*-*-*-*-*-*-*-*/
 .eve_h2{
   margin-bottom: 30px;

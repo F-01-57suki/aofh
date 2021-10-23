@@ -1,6 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////
-//パニック時の処理（キャラステ半減を予定）は未実装
+//パニック時の処理
+//add_damage*2
 ///////////////////////////////////////////////////////////
 
 require_once "tmp/post.php";
@@ -11,13 +12,29 @@ if(!isset($_SESSION["enemy_name"])):
   header('Location: index.php');
   die();
 endif;
+?>
+<script>
+  battle_ui.style.backgroundImage = "url(images/<?php echo $_SESSION["enemy_type"]; ?>.jpg)";
+</script>
+<?php
+$stmt = $pdo->prepare("SELECT `panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
+$stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$panic_flg = $result["panic_flg"];
+$stmt = null;
+if($panic_flg == 1):
+  $add_damage = $_SESSION["add_damage"]*2;//パニック中は被ダメが倍
+else:
+  $add_damage = $_SESSION["add_damage"];
+endif;
 
 //撃破（赤羽かつ、非ゴーストのみ）
 if($_POST["battle"] == "kill"):
   if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
     //敵ダメージ分のAPを減算、終了処理へ（被ダメ1.5倍か悩み中・・・・・・・）
     $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`-:add_damage WHERE `username`=:username");
-    $stmt->bindParam(":add_damage",$_SESSION["add_damage"]);
+    $stmt->bindParam(":add_damage",$add_damage);
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
@@ -30,12 +47,11 @@ if($_POST["battle"] == "kill"):
     $now_sp = $result["now_sp"];
     $panic_flg = $result["panic_flg"];
     $stmt = null;
-    $add_damage = $_SESSION["add_damage"];
     require_once "tmp/battle_end.php";
     ?>
       <section>
         <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
-        <p class="eve_p">実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
+        <p class="eve_p">&emsp;実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
       </section>
     </div>
     <div>
@@ -61,7 +77,7 @@ elseif($_POST["battle"] == "purify"):
     ?>
       <section>
         <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐古びたカメラ‐</span></h2>
-        <p class="eve_p">相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
+        <p class="eve_p">&emsp;相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
       </section>
     </div>
     <div>
@@ -86,7 +102,7 @@ elseif($_POST["battle"] == "stealth"):
     ?>
       <section>
         <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
-        <p class="eve_p">物陰に隠れ、息を殺してじっと待つ。不気味な気配は暫く周囲を探していたようだが、――やがて諦めたのか、どこかへと去っていった……。</p>
+        <p class="eve_p">&emsp;物陰に隠れ、息を殺す。早鐘を打つ心臓を、必死で抑える。<br>&emsp;不気味な気配は暫く近くを探していたようだが、――やがて諦めたのか、どこかへと去っていった……。</p>
       </section>
     </div>
     <div>
@@ -96,7 +112,7 @@ elseif($_POST["battle"] == "stealth"):
   else:
     //失敗処理（AP/SP減少の後、「次へ」を表示。押したら再度バトル処理へ）
     $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_ap`=`now_ap`-:add_damage,`now_sp`=`now_sp`-:add_fear WHERE `username`=:username");//ターンも1加算
-    $stmt->bindParam(":add_damage",$_SESSION["add_damage"]);
+    $stmt->bindParam(":add_damage",$add_damage);
     $stmt->bindParam(":add_fear",$_SESSION["add_fear"]);
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
@@ -143,7 +159,7 @@ elseif($_POST["battle"] == "stealth"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-        <p>咄嗟に隠れるも、すぐに見つかってしまった。<br><span class="system_span">怪異との接触により、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <p>&emsp;慌てて隠れるも、すぐに見つかってしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
       </section>
     </div>
     <div>
@@ -166,7 +182,7 @@ elseif($_POST["battle"] == "speed"):
     ?>
       <section>
         <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
-        <p>考えるよりも先に、体が動いていた。無我夢中で走っていた。<br>そして、――やがて疲れて立ち止まると、もう不気味な気配は追ってきていなかった。</p>
+        <p>&emsp;考えるよりも先に、体が動いていた。無我夢中で走っていた。<br>&emsp;そして、――やがて疲れて立ち止まると、もう不気味な気配は追ってきていなかった。</p>
       </section>
     </div>
     <div>
@@ -176,7 +192,7 @@ elseif($_POST["battle"] == "speed"):
   else:
     //失敗処理（AP/SP減少の後、「次へ」を表示。押したら再度バトル処理へ）
     $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_ap`=`now_ap`-:add_damage,`now_sp`=`now_sp`-:add_fear WHERE `username`=:username");//ターンも1加算
-    $stmt->bindParam(":add_damage",$_SESSION["add_damage"]);
+    $stmt->bindParam(":add_damage",$add_damage);
     $stmt->bindParam(":add_fear",$_SESSION["add_fear"]);
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
@@ -223,7 +239,7 @@ elseif($_POST["battle"] == "speed"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-        <p>走って逃げるも、すぐに追いつかれてしまった。<br><span class="system_span">怪異との接触により、APが<?php echo $_SESSION["add_damage"]; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <p>&emsp;走って逃げるも、すぐに追いつかれてしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
       </section>
     </div>
     <div>

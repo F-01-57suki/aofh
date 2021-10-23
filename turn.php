@@ -12,7 +12,11 @@ if($action_flg):
     $stmt->execute();
     $stmt = null;
     ?>
-        <p>パニックで動けない……。</p>
+        <section>
+          <h2 class="eve_h2 ng">‐パニック発生中‐</span></h2>
+            <p>&emsp;うまく息ができない……。なすすべもなく、その場にうずくまった。<br><span class="system_span">&emsp;APが1回復。SPが1回復。</span></p>
+          <a href="turn.php" class="next_turn">次のターンへ</a>
+        </section>
       </div>
       <div>
         <a href="turn.php" class="next_turn">次のターンへ</a>
@@ -57,8 +61,12 @@ else:
       require_once "tmp/enemy_set.php";
 ?>
 <script>
+  const battle_ui = document.getElementById("battle_ui");
+  battle_ui.style.display = "block";
+if(panic_flg == 0){
   const charaimg = document.getElementById("charaimg");
   charaimg.src = "images/dkdk_<?php echo $chara_id; ?>.png";
+}
 </script>
 <?php
     endif;
@@ -79,6 +87,9 @@ else:
     $_SESSION["chara_stealth"] = $chara_stealth;
     $stmt = null;
     ?>
+    <script>
+      battle_ui.style.backgroundImage = "url(images/<?php echo $_SESSION["enemy_type"]; ?>.jpg)";
+    </script>
         <form action="battle.php" method="post" id="action">
         <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
     <?php
@@ -99,9 +110,9 @@ else:
       </div>
       <div>
         <?php if($firstmessage == 1): ?>
-        <p>異質な気配が近付く……。<br><span class="system_span">SAN値が<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <p>その恐ろしい姿に、背筋が凍った……。<br><span class="system_span">SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
         <?php else: ?>
-        <p>二度目のメッセージかんがえちゅう</p>
+        <p>何度も失敗はできない。どうすべきだろうか……？</p>
         <?php endif; ?>
       </div>
     </main>
@@ -137,10 +148,11 @@ else:
         $stmt->execute();
         $stmt = null;
         ?>
-            <p>パニックで動けない……。</p>
-          </div>
-          <div>
-            <a href="turn.php" class="next_turn">次のターンへ</a>
+            <section>
+              <h2 class="eve_h2 ng">‐パニック発生中‐</span></h2>
+              <p>&emsp;うまく息ができない……。なすすべもなく、その場にうずくまった。<br><span class="system_span">&emsp;APが1回復。SPが1回復。</span></p>
+              <a href="turn.php" class="next_turn">次のターンへ</a>
+            </section>
           </div>
         </main>
         <?php

@@ -70,7 +70,7 @@ elseif($add_sp != 0)://AP追加イベント
 endif;
 ?>
   <section>
-    <h2 class="eve_h2">イベント発生<br><span class="eve_span">‐<?php echo $event_name ; ?>‐</span></h2>
+    <h2 class="eve_h2">イベント発生<br><span class="eve_span">‐<?php echo $event_name; ?>‐</span></h2>
     <p class="eve_p"><?php echo $evearr["$event_id_lottery"]; ?></p>
     <p><span class="system_span"><?php echo $event_effect; ?>した。</span></p>
   </section>

@@ -98,6 +98,10 @@ endif;
     <title>AVACHIofHORROR（仮）</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script>
+      let panic_flg = <?php echo $panic_flg; ?>;
+      let enemy_id = <?php echo $enemy_id; ?>;
+    </script>
   </head>
   <body id="turn">
     <div id="wrapper">
@@ -128,6 +132,16 @@ endif;
         </div>
       </header>
       <main>
+        <div id="battle_ui">
+          <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
+          <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+        </div>
+        <script>
+          if(enemy_id != 0){
+            const battle_ui = document.getElementById("battle_ui");
+            battle_ui.style.display = "block";
+          }
+        </script>
         <div id="contwrap">
 <?php
 if($panic_flg == 1):
