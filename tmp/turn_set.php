@@ -22,6 +22,12 @@ else:
   $stmt = null;
 endif;
 
+//ゲームオーバー判定
+if($now_ap <= 0):
+  header('Location: failed.php');
+  die();
+endif;
+
 //マップの取得
 $stmt = $pdo->prepare("SELECT `map_size`,`enemy_rand`,`event_rand` FROM `map_tbl` WHERE `map_id`=:map_id");
 $stmt->bindParam(":map_id",$map_id);
@@ -36,6 +42,14 @@ $map_remain = $map_size - $now_adv;
 //ある数は全体の何パーセントか？ という計算は ある数 ÷ 全体 ×100. という式
 $map_percent = ($now_adv / $map_size) * 100;
 
+//クリア判定
+//now_advがmap_sizeに到達したか？
+if($now_adv >= $map_size):
+  //リザルト表示へ（そっちで評価出してポイント加算してセーブ消す）
+  header('Location: result.php');
+  die();
+endif;
+
 //キャラの取得
 //スキルは未実装のため、実装後の取得
 $stmt = $pdo->prepare("SELECT `chara_ap`,`chara_sp`,`chara_speed`,`chara_stealth` FROM `chara_tbl` WHERE `chara_id`=:chara_id");
@@ -47,18 +61,6 @@ $chara_sp = $result["chara_sp"];
 $chara_speed = $result["chara_speed"];
 $chara_stealth = $result["chara_stealth"];
 $stmt = null;
-
-//ゲームオーバー判定
-if($now_ap <= 0):
-  header('Location: failed.php');
-endif;
-
-//クリア判定
-//now_advがmap_sizeに到達したか？
-if($now_adv >= $map_size):
-  //リザルト表示へ（そっちで評価出してポイント加算してセーブ消す）
-  header('Location: result.php');
-endif;
 
 //パニック判定
 if($now_sp <= 0 and $panic_flg == 0)://SPが0になった
