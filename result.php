@@ -48,7 +48,7 @@ $point = $result["point"];
 $stmt = null;
 
 //判定
-if($now_adv != $map_size):
+if($now_adv <= $map_size):
   header('Location: turn.php');
   die();
 endif;
