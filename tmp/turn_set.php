@@ -55,7 +55,7 @@ endif;
 
 //クリア判定
 //now_advがmap_sizeに到達したか？
-if($now_adv == $map_size):
+if($now_adv >= $map_size):
   //リザルト表示へ（そっちで評価出してポイント加算してセーブ消す）
   header('Location: result.php');
 endif;
