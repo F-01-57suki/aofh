@@ -198,5 +198,6 @@ endif;
       const gage_now = document.getElementById("gage_now");
       gage_now.style.width = "<?php echo $map_percent; ?>%";
     </script>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 //DB情報
-$dbname = 'mysql:host=mysql1.php.xdomain.ne.jp;dbname=crimsonscar_aofh;charset=utf8';
-$id = 'crimsonscar_root';
-$pw = 'Ha020714';
+$dbname = 'mysql:host=localhost;dbname=crimsonscar_aofh;charset=utf8';//mysql1.php.xdomain.ne.jp
+$id = 'root';//crimsonscar_root
+$pw = '';//Ha020714
 //DB接続
 try{
   $pdo = new pdo($dbname,$id,$pw,array(PDO::ATTR_EMULATE_PREPARES => false));

@@ -91,5 +91,6 @@ $stmt = null;
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
       </footer>
     </div>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>

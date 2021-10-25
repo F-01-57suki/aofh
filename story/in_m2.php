@@ -9,14 +9,15 @@
   <body id="intro" class="map2">
     <div id="wrapper">
       <header>
-      <h1>未実装です</h1>
+      <h1>未実装マップ</h1>
       </header>
       <main>
-          <p>未実装です</p>
+          <p>現在、未実装のマップです。startからセーブ破棄して下さい。<br><a href="index.php">TOPへ戻る</a></p>
       </main>
       <footer>
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
       </footer>
     </div>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>

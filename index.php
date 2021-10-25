@@ -148,5 +148,6 @@ endwhile;
         }
       }
     </script>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>

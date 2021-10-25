@@ -69,5 +69,6 @@ endif;
       gage_now.style.width = "<?php echo $map_percent; ?>%";
       console.log(<?php echo $map_percent; ?>);
     </script>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>

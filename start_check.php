@@ -41,6 +41,7 @@ if($result):
       </footer>
     </div>
   </body>
+  <?php require_once "tmp/ng_js.php"; ?>
 </html>
 <?php
 endif;
@@ -144,5 +145,6 @@ endif;
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
       </footer>
     </div>
+    <?php require_once "tmp/ng_js.php"; ?>
   </body>
 </html>
