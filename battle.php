@@ -51,7 +51,7 @@ if($_POST["battle"] == "kill"):
     ?>
       <section>
         <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
-        <p class="eve_p">&emsp;実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
+        <p class="eve_p">&emsp;実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
       </section>
     </div>
     <div>
@@ -77,7 +77,7 @@ elseif($_POST["battle"] == "purify"):
     ?>
       <section>
         <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐古びたカメラ‐</span></h2>
-        <p class="eve_p">&emsp;相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
+        <p class="eve_p">&emsp;相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
       </section>
     </div>
     <div>

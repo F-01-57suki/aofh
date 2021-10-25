@@ -126,6 +126,10 @@ if(panic_flg == 0){
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;
+        //感知（新城のみ）
+        if($chara_id == 1):
+          require_once "tmp/skill_id1.php";
+        endif;
       endif;
     else:
       if($enemies_lottery <= $enemy_rand)://マップごとDBに持っている確率
@@ -133,6 +137,10 @@ if(panic_flg == 0){
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;
+        //感知（新城のみ）
+        if($chara_id == 1):
+          require_once "tmp/skill_id1.php";
+        endif;
       endif;
     endif;
     //接敵イベントなければイベント抽選（パニック時どうするか未定・・・・・・・・・・・・

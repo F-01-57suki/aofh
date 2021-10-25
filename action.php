@@ -45,7 +45,7 @@ elseif($_POST["action"] == "move"):
   <p>&emsp;一刻も早く、ここから脱出しなければ。<br>&emsp;周囲を警戒しながら、慎重な足取りで暗闇の先へと進んだ。</p>
   <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
-else:
+elseif($_POST["action"] == "return"):
   //戻る
   $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`-1,`now_turn`=`now_turn`+1,`enemies_flg`=0 WHERE `username`=:username");
   $stmt->bindParam(":username",$_SESSION["username"]);

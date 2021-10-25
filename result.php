@@ -39,14 +39,6 @@ else:
   $stmt = null;
 endif;
 
-//現在のポイントを取得
-$stmt = $pdo->prepare("SELECT `point` FROM `user_tbl` WHERE `username`=:username");
-$stmt->bindParam(":username",$_SESSION["username"]);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-$point = $result["point"];
-$stmt = null;
-
 //判定
 if($now_adv < $map_size):
   header('Location: turn.php');
@@ -76,6 +68,14 @@ $stmt->bindParam(":addp",$addp);
 $stmt->bindParam(":news",$news);
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
+$stmt = null;
+
+//所持ポイントを取得
+$stmt = $pdo->prepare("SELECT `point` FROM `user_tbl` WHERE `username`=:username");
+$stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$point = $result["point"];
 $stmt = null;
 
 //クリアデータの保存
@@ -121,13 +121,13 @@ $stmt = null;
               <td colspan="2"><img src="images/rank_<?php echo $rank; ?>.png" alt="<?php echo $rank; ?>ランク獲得"></td>
             </tr>
             <tr>
-              <th>総ターン数：</th><td><?php echo $now_turn; ?></td>
+              <th>総ターン数：</th><td><?php echo $now_turn; ?>&nbsp;T</td>
             </tr>
             <tr>
-              <th>獲得ポイント：</th><td><?php echo $addp; ?></td>
+              <th>獲得ポイント：</th><td><?php echo $addp; ?>&nbsp;p</td>
             </tr>
           </table>
-          <p>クリアランクに応じたポイントが加算されました。</p>
+          <p>クリアランクに応じ、ポイントを獲得しました。<br>現在の所持ポイントが「<span class="system_span"><?php echo $point; ?>p」</span>になりました。</p>
           <a href="index.php">TOPへ戻る</a>
         </div>
       </main>
