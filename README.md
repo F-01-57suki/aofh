@@ -12,7 +12,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- スキルのリキャスト処理
+- スキルの使用間隔を可視化
 - フレーバーテキストを進捗に合わせて出し分け
 
 ## 不具合
