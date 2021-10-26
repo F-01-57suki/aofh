@@ -1,9 +1,4 @@
 <?php
-///////////////////////////////////////////////////////////
-//パニック時の処理
-//add_damage*2
-///////////////////////////////////////////////////////////
-
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
@@ -24,70 +19,19 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 $panic_flg = $result["panic_flg"];
 $stmt = null;
 if($panic_flg == 1):
-  $add_damage = $_SESSION["add_damage"]*2;//パニック中は被ダメが倍
+  //パニック中は被ダメが倍
+  $add_damage = $_SESSION["add_damage"]*2;
 else:
   $add_damage = $_SESSION["add_damage"];
 endif;
 
-//撃破（赤羽かつ、非ゴーストのみ）
-if($_POST["battle"] == "kill"):
-  if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
-    //敵ダメージ分のAPを減算、終了処理へ（被ダメ1.5倍か悩み中・・・・・・・）
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`-:add_damage WHERE `username`=:username");
-    $stmt->bindParam(":add_damage",$add_damage);
-    $stmt->bindParam(":username",$_SESSION["username"]);
-    $stmt->execute();
-    $stmt = null;
-    //現在のAP/SPを取得！！！！！！！！！！！１１
-    $stmt = $pdo->prepare("SELECT `now_ap`,`now_sp`,`panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
-    $stmt->bindParam(":username",$_SESSION["username"]);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $now_ap = $result["now_ap"];
-    $now_sp = $result["now_sp"];
-    $panic_flg = $result["panic_flg"];
-    $stmt = null;
-    require_once "tmp/battle_end.php";
-    ?>
-      <section>
-        <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
-        <p class="eve_p">&emsp;実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
-      </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
-    </div>
-    <?php
-  else:
-    //エラー
-    die("エラーが発生しました。");
-  endif;
+//赤羽スキル発動
+if($_POST["battle"] == "kill" and $now_recast == 0):
+  require_once "tmp/skill_id4.php";
 
-//お祓い（蘆野かつ、ゴーストのみ）
-elseif($_POST["battle"] == "purify"):
-  if($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost"):
-    //恐怖値2倍のSPを加算、終了処理へ
-    $addsp = ($_SESSION["add_fear"])*2;
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_sp`=`now_sp`+:addsp WHERE `username`=:username");
-    $stmt->bindParam(":addsp",$addsp);
-    $stmt->bindParam(":username",$_SESSION["username"]);
-    $stmt->execute();
-    $stmt = null;
-    require_once "tmp/battle_end.php";
-    ?>
-      <section>
-        <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐古びたカメラ‐</span></h2>
-        <p class="eve_p">&emsp;相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
-      </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
-    </div>
-    <?php
-  else:
-    //エラー
-    die("エラーが発生しました。");
-  endif;
+//蘆野スキル発動
+elseif($_POST["battle"] == "purify" and $now_recast == 0):
+  require_once "tmp/skill_id2.php";
 
 //隠れる
 //ステルスが高ければ成功確率上昇（乱数とってキャラステルスの範囲内なら成功）
@@ -110,8 +54,12 @@ elseif($_POST["battle"] == "stealth"):
     </div>
     <?php
   else:
-    //失敗処理（AP/SP減少の後、「次へ」を表示。押したら再度バトル処理へ）
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_ap`=`now_ap`-:add_damage,`now_sp`=`now_sp`-:add_fear WHERE `username`=:username");//ターンも1加算
+    //失敗処理（AP/SP減少の後、「次へ」を表示。押したらターン1加算で再度バトル処理へ）
+    if($now_recast == 0):
+      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_ap`=`now_ap`-:add_damage,`now_sp`=`now_sp`-:add_fear WHERE `username`=:username");
+    else:
+      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1,`now_ap`=`now_ap`-:add_damage,`now_sp`=`now_sp`-:add_fear WHERE `username`=:username");
+    endif;
     $stmt->bindParam(":add_damage",$add_damage);
     $stmt->bindParam(":add_fear",$_SESSION["add_fear"]);
     $stmt->bindParam(":username",$_SESSION["username"]);
@@ -175,7 +123,8 @@ elseif($_POST["battle"] == "speed"):
   //キャラの速度から敵の速度を引き、判定へ
   $speed_check = ($_SESSION["chara_speed"])-($_SESSION["enemy_speed"]);
   $speed_lottery = mt_rand(1,10);
-
+  //狩場スキル発動
+  require_once "tmp/skill_id3.php";
   //lotteryがcheck以下なら成功
   if($speed_lottery <= $speed_check):
     require_once "tmp/battle_end.php";

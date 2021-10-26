@@ -7,7 +7,11 @@ if($action_flg):
   //パニックなら操作不能
   if($panic_flg):
     //強制で休む
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+    if($now_recast == 0):
+      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+    else:
+      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+    endif;
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
@@ -93,11 +97,13 @@ if(panic_flg == 0){
         <form action="battle.php" method="post" id="action">
         <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
     <?php
-    if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
+    //赤羽スキル選択
+    if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost" and $now_recast == 0):
       ?>
           <button type="submit" name="battle" value="kill" class="action_btn">撃破</button><br>
       <?php
-    elseif($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost"):
+    //蘆野スキル選択
+    elseif($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost" and $now_recast == 0):
       ?>
       <button type="submit" name="battle" value="purify" class="action_btn">お祓い</button><br>
       <?php
@@ -127,9 +133,7 @@ if(panic_flg == 0){
         $stmt->execute();
         $stmt = null;
         //感知（新城のみ）
-        if($chara_id == 1):
-          require_once "tmp/skill_id1.php";
-        endif;
+        require_once "tmp/skill_id1.php";
       endif;
     else:
       if($enemies_lottery <= $enemy_rand)://マップごとDBに持っている確率
@@ -138,9 +142,7 @@ if(panic_flg == 0){
         $stmt->execute();
         $stmt = null;
         //感知（新城のみ）
-        if($chara_id == 1):
-          require_once "tmp/skill_id1.php";
-        endif;
+        require_once "tmp/skill_id1.php";
       endif;
     endif;
     //接敵イベントなければイベント抽選（パニック時どうするか未定・・・・・・・・・・・・
@@ -151,7 +153,11 @@ if(panic_flg == 0){
       //パニックなら操作不能
       if($panic_flg):
         //強制で休む
-        $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+        if($now_recast == 0):
+          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+        else:
+          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+        endif;
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;

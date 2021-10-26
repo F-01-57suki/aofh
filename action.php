@@ -25,7 +25,11 @@ endif;
 <?php
 if($_POST["action"] == "rest"):
   //休む
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  if($now_recast == 0):
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  else:
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+  endif;
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
@@ -36,7 +40,11 @@ if($_POST["action"] == "rest"):
   <?php
 elseif($_POST["action"] == "move"):
   //進む
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  if($now_recast == 0):
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  else:
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+  endif;
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
@@ -47,7 +55,11 @@ elseif($_POST["action"] == "move"):
   <?php
 elseif($_POST["action"] == "return"):
   //戻る
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`-1,`now_turn`=`now_turn`+1,`enemies_flg`=0 WHERE `username`=:username");
+  if($now_recast == 0):
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`-1,`now_turn`=`now_turn`+1,`enemies_flg`=0 WHERE `username`=:username");
+  else:
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_adv`=`now_adv`-1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1,`enemies_flg`=0 WHERE `username`=:username");
+  endif;
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
