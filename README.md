@@ -13,6 +13,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 
 ## 着手中
 - スキルの使用間隔を可視化
+- ターン加算のタイミング（イケてない気がするので見直し中）
 - フレーバーテキストを進捗に合わせて出し分け
 
 ## 不具合
