@@ -543,15 +543,28 @@ footer{
   font-weight: bold;
   text-align: right;
 }
-
+#info>p:last-child{
+  margin-top: 10px;
+}
+.info_t{
+  font-size: 1.4rem;
+}
 #now_turn{
   font-size: 3rem;
   color: rgb(255, 255, 255);
   text-shadow: 0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153);
 }
-#now_ap,#now_sp{
+.now_p{
   font-size: 2rem;
   text-shadow: 1px 0 0 rgb(255, 255, 255),0 1px 0 rgb(255, 255, 255),-1px 0 0 rgb(255, 255, 255),0 -1px 0 rgb(255, 255, 255);
+}
+
+#skill_ok{
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153),0 0 3px rgb(0, 51, 153);
+}
+#skill_ng{
+  color: rgba(0, 0, 0,0.3);
 }
 
 #map_gage{

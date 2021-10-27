@@ -20,4 +20,5 @@ $stmt = null;
 
 $filepass = "story/in_m".$map_id.".php";
 require_once "$filepass";
+$pdo = null;
 ?>

@@ -1,12 +1,12 @@
 <?php
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
-require_once "tmp/db.php";
-require_once "tmp/turn_set.php";
 if(!isset($_SESSION["enemy_name"])):
   header('Location: index.php');
   die();
 endif;
+require_once "tmp/db.php";
+require_once "tmp/turn_set.php";
 ?>
 <script>
   battle_ui.style.backgroundImage = "url(images/<?php echo $_SESSION["enemy_type"]; ?>.jpg)";
@@ -107,6 +107,9 @@ elseif($_POST["battle"] == "stealth"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
+        <!-- /////////////////////////////////////////////////////////////////////////////// -->
+        <?php echo "<p>キャラ",$_SESSION["chara_stealth"],"-敵",$_SESSION["enemy_wisdom"],"、判定",$stealth_check,"、確率",$stealth_lottery,"</p>"; ?>
+<!-- /////////////////////////////////////////////////////////////////////////////// -->
         <p>&emsp;慌てて隠れるも、すぐに見つかってしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
       </section>
     </div>
@@ -188,6 +191,11 @@ elseif($_POST["battle"] == "speed"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
+
+<!-- /////////////////////////////////////////////////////////////////////////////// -->
+<?php echo "<p>キャラ",$_SESSION["chara_speed"],"-敵",$_SESSION["enemy_speed"],"、判定",$speed_check,"、確率",$speed_lottery,"</p>"; ?>
+<!-- /////////////////////////////////////////////////////////////////////////////// -->
+
         <p>&emsp;走って逃げるも、すぐに追いつかれてしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
       </section>
     </div>
@@ -197,6 +205,7 @@ elseif($_POST["battle"] == "speed"):
     <?php
   endif;
 endif;
+$pdo = null;
 ?>
       </main>
       <footer>

@@ -8,6 +8,8 @@ $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if(!$result):
+  $stmt = null;
+  $pdo = null;
   header('Location: index.php');
   die();
 else:
@@ -56,6 +58,7 @@ $stmt = $pdo->prepare("DELETE FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">

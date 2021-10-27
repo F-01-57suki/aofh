@@ -7,9 +7,13 @@ $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result):
+  $stmt = null;
+  $pdo = null;
   header('Location: turn.php');
   die();
 else:
+  $stmt = null;
+  $pdo = null;
   header('Location: start.php');
   die();
 endif;

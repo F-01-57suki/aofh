@@ -19,7 +19,7 @@ if($lost_a == 1 and $_POST["chara"] == 1 or $lost_t == 1 and $_POST["chara"] == 
 endif;
 
 //既存セーブがないことを確認し、新規セーブ作成
-$stmt = $pdo->prepare("SELECT * FROM `user_save_tbl` WHERE `username`=:username");
+$stmt = $pdo->prepare("SELECT `save_id` FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -44,6 +44,7 @@ else:
   $stmt->bindParam(":now_sp",$sp);
   $stmt->execute();
   $stmt = null;
+  $pdo = null;
 endif;
 header('Location: intro.php');
 ?>

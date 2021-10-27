@@ -1,15 +1,14 @@
 <?php
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
-require_once "tmp/db.php";
-
 //選択せずボタンを押した際は弾く
 if(!isset($_POST["reborn"])):
   header('Location: shop.php');
   die();
 endif;
+require_once "tmp/db.php";
 
-//リロード対策
+//リロード対策（ロストフラグを配列へ、復活キャラと照合してフラグ0なら処理なし
 $stmt = $pdo->prepare("SELECT `lost_a`,`lost_t`,`lost_m`,`lost_y` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
@@ -22,6 +21,7 @@ $lostarr = array(null,$lost_a,$lost_t,$lost_m,$lost_y);
 $stmt = null;
 $lostkey = $_POST["reborn"];
 if($lostarr[$lostkey] == 0):
+  $pdo = null;
   header('Location: shop.php');
   die();
 endif;
@@ -64,6 +64,7 @@ endif;
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">

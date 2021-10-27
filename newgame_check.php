@@ -3,8 +3,6 @@ require_once "tmp/post.php";
 require_once "tmp/session_out.php";
 require_once "tmp/db.php";
 
-$errors = array();
-
 //ユーザー名
 if(preg_match("/^[A-Za-z0-9_.!?*-]{1,60}$/",$_POST['username'])):
   $username = htmlspecialchars($_POST['username'],ENT_QUOTES,'UTF-8');
@@ -20,7 +18,7 @@ if($result):
   $errors["ユーザー名"]="このユーザー名は既に使用されています。";
 endif;
 $stmt = null;
-$pdo = null;
+$pdo = null;//以後はDB接続ないため切断
 
 //pass
 if(preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,16}$/",$_POST['pass'])):
@@ -29,7 +27,7 @@ else:
   $errors["パスワード"]="パスワードを正しく入力して下さい（半角英数字8～16文字）";
 endif;
 
-if(count($errors)!==0):
+if(count($errors) !== 0):
   require_once "tmp/error.php";
 else:
   $_SESSION['ucheck'] = $username;

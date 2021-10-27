@@ -8,6 +8,8 @@ $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if(!$result):
+  $stmt = null;
+  $pdo = null;
   header('Location: index.php');
   die();
 else:
@@ -23,7 +25,9 @@ $stmt = $pdo->prepare("SELECT `map_name`,`map_size`,`rank_s_turn`,`rank_a_turn`,
 $stmt->bindParam(":map_id",$map_id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$result):
+if(!$result)://マップ無いはダメなので判定不要かも？考え中…
+  $stmt = null;
+  $pdo = null;
   header('Location: index.php');
   die();
 else:
@@ -41,6 +45,7 @@ endif;
 
 //判定
 if($now_adv < $map_size):
+  $pdo = null;
   header('Location: turn.php');
   die();
 endif;
@@ -93,11 +98,8 @@ $stmt = $pdo->prepare("DELETE FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $stmt = null;
-
+$pdo = null;
 //評価の表示とエピローグ
-//「$rank」ごとに画像を変える。加算ポイントのテキストは「$addp」を表示
-//リザルトの後にエピローグ
-//クリックでindexに飛ぶ
 ?>
 <!DOCTYPE html>
 <html lang="ja">

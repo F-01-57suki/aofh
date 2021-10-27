@@ -15,6 +15,7 @@ if($action_flg):
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
+    $pdo = null;
     ?>
         <section>
           <h2 class="eve_h2 ng">‐パニック発生中‐</span></h2>
@@ -46,6 +47,7 @@ if($action_flg):
     <?php
     endif;
   $stmt = null;
+  $pdo = null;
   ?>
           </form>
         </section>
@@ -106,10 +108,7 @@ if(panic_flg == 0){
     elseif($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost" and $now_recast == 0):
       ?>
       <button type="submit" name="battle" value="purify" class="action_btn">お祓い</button><br>
-      <?php
-    endif;
-    $stmt = null;
-    ?>
+      <?php endif; ?>
           <button type="submit" name="battle" value="stealth" class="action_btn">隠れる</button><br>
           <button type="submit" name="battle" value="speed" class="action_btn">逃げる</button><br>
         </form>
@@ -123,6 +122,7 @@ if(panic_flg == 0){
       </div>
     </main>
     <?php
+    $pdo = null;
   else:
     //接敵フラグを抽選、当たれば加算。
     $enemies_lottery = mt_rand(1,10);
@@ -149,6 +149,7 @@ if(panic_flg == 0){
     $event_lottery = mt_rand(1,10);
     if($event_lottery <= $event_rand)://マップごとDBに持っている確率
       require_once "tmp/event.php";
+      $pdo = null;
     else:
       //パニックなら操作不能
       if($panic_flg):
@@ -170,6 +171,7 @@ if(panic_flg == 0){
           </div>
         </main>
         <?php
+        $pdo = null;
       else:
       //行動選択画面を表示
       $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `action_flg`=1 WHERE `username`=:username");
@@ -193,6 +195,7 @@ if(panic_flg == 0){
       <?php
       endif;
       $stmt = null;
+      $pdo = null;
       ?>
           </form>
         </section>

@@ -55,7 +55,28 @@ while($i <= $map_count):
 endwhile;
 
 //ランキングの取得
-//考え中・・・・（自分の順位を取得できるか？できなければマップごと一位のみ
+//１．クリアデータから、WHEREマップ・ターン昇順に並び替えた結果を全件取得
+//２．for回して配列に入れるなり、iでカウントして該当ユーザのデータ出たら止める（iが順位になる）？
+$map_id1 = 1;//マップ数を取得して配列に入れたい・・・・・
+$m1_ranking = null;//マップ数を取得して変数名作りたい・・・
+$m1_clear_turn = null;//マップ数を取得して変数名作りたい・・・
+$j = 1;
+//マップID1
+$stmt = $pdo->prepare("SELECT `clear_turn`,`username` FROM `clear_save_tbl` WHERE `map_id`=:map_id ORDER BY `clear_turn` ASC");
+$stmt->bindParam(":map_id",$map_id1);
+$stmt->execute();
+while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
+  if($result["username"] == $_SESSION["username"]):
+    $m1_ranking = $j;
+    $m1_clear_turn = $result["clear_turn"];
+    break;
+  endif;
+  $j++;
+endwhile;
+$stmt = null;
+//マップID2
+
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">

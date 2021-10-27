@@ -17,6 +17,7 @@ if($result["action_flg"] == 1):
   $stmt = null;
 else:
   $stmt = null;
+  $pdo = null;
   header('Location: index.php');
   die();
 endif;
@@ -69,6 +70,7 @@ elseif($_POST["action"] == "return"):
   <a href="turn.php" class="next_turn">次のターンへ</a>
   <?php
 endif;
+$pdo = null;
 ?>
         </div>
       </main>

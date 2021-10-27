@@ -36,6 +36,7 @@ while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
   $sell_price_reborn[$sellkey] = $result["sell_price"];
 endwhile;
 $stmt = null;
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">
