@@ -8,5 +8,5 @@ if(!isset($_SESSION['username'])):
   header('Location: login.php');
 endif;
 //エラー配列の作成
-$errors=array();
+$errors = array();
 ?>

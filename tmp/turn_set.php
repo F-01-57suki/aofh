@@ -114,7 +114,7 @@ endif;
         </div>
         <div id="turn_header">
           <div id="map_gage">
-            <div id="gage_title"><p>0%&nbsp;&nbsp; </p><p>&nbsp;50%</p><p>100%</p></div>
+            <div id="gage_title"><p>0%&nbsp;&nbsp;</p><p>&nbsp;50%</p><p>100%</p></div>
             <div id="gage_all"><div id="gage_now"></div></div>
             <p>残りの距離&emsp;<?php echo $map_remain; ?></p>
           </div>
@@ -123,12 +123,19 @@ endif;
               ＴＵＲＮ&emsp;<span id="now_turn"><?php echo $now_turn; ?></span>
             </p>
             <p>
-              <i class="fas fa-heartbeat fa-fw"></i> ＡＰ：<span id="now_ap"><?php echo $now_ap; ?></span>
+              <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span><span class="now_p"><?php echo $now_ap; ?></span>
               &emsp;
-              <i class="fas fa-brain fa-fw"></i> ＳＰ：<span id="now_sp"><?php echo $now_sp; ?></span>
+              <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span><span class="now_p"><?php echo $now_sp; ?></span>
               <?php if($panic_flg): ?>
               <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
             <?php endif; ?>
+            </p>
+            <p>
+            <?php if($now_recast == 0): ?>
+                <i class="fas fa-toolbox" id="skill_ok"></i><span class="info_t">&nbsp;スキル発動可能</span>
+              <?php else: ?>
+                <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;ＣＴ：</span><span class="now_p"><?php echo $now_recast; ?></span>
+              <?php endif; ?>
             </p>
           </div>
         </div>
