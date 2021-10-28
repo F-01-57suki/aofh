@@ -1,6 +1,7 @@
 <?php
 require_once "tmp/session_in.php";
 require_once "tmp/db.php";
+require_once "tmp/flavorarr.php";
 
 $contflag = 1;
 //途中セーブの確認
@@ -11,8 +12,8 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result):
   $contflag = 1;
   $map_id = $result["map_id"];      //マップの背景用に取得
-  $chara_id = $result["chara_id"];  //TOP絵用に取得
-  $panic_flg = $result["panic_flg"];//TOP絵用に取得
+  $chara_id = $result["chara_id"];  //TOP絵用に取得　ニュース使うからいらないかも
+  $panic_flg = $result["panic_flg"];//TOP絵用に取得　ニュース使うからいらないかも
 else:
   $contflag = 0;
 endif;
@@ -54,28 +55,57 @@ while($i <= $map_count):
   $i++;
 endwhile;
 
-//ランキングの取得
-//１．クリアデータから、WHEREマップ・ターン昇順に並び替えた結果を全件取得
-//２．for回して配列に入れるなり、iでカウントして該当ユーザのデータ出たら止める（iが順位になる）？
-$map_id1 = 1;//マップ数を取得して配列に入れたい・・・・・
-$m1_ranking = null;//マップ数を取得して変数名作りたい・・・
-$m1_clear_turn = null;//マップ数を取得して変数名作りたい・・・
-$j = 1;
-//マップID1
-$stmt = $pdo->prepare("SELECT `clear_turn`,`username` FROM `clear_save_tbl` WHERE `map_id`=:map_id ORDER BY `clear_turn` ASC");
-$stmt->bindParam(":map_id",$map_id1);
+//マップ名を取得
+$mapname_arr = array();
+$stmt = $pdo->prepare("SELECT `map_id`,`map_name` FROM `map_tbl`");
 $stmt->execute();
 while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
-  if($result["username"] == $_SESSION["username"]):
-    $m1_ranking = $j;
-    $m1_clear_turn = $result["clear_turn"];
-    break;
-  endif;
-  $j++;
+  $setid = $result["map_id"];
+  $mapname_arr[$setid] = $result["map_name"];
 endwhile;
 $stmt = null;
-//マップID2
 
+//ランキングの取得
+//１．クリアデータから、WHEREマップ・ターン昇順に並び替えた結果を全件取得
+//２．for回して配列に入れるなり、iでカウントして該当ユーザのデータ出たら止める（iが順位になる）
+$mapid_arr = array();
+for($i = 1;$i <= $map_count;$i++):
+  $mapid_arr[$i] = $i;
+endfor;
+foreach($mapid_arr as $value):
+  $stmt = $pdo->prepare("SELECT `clear_turn`,`username` FROM `clear_save_tbl` WHERE `map_id`=:map_id ORDER BY `clear_turn` ASC");
+  $stmt->bindParam(":map_id",$value);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  if($result):
+    for($i = 1;$result = $stmt->fetch(PDO::FETCH_ASSOC);$i++):
+      if($result["username"] == $_SESSION["username"]):
+        //順位
+        $setname = "m".$value."_ranking";
+        $$setname = $i;
+        //スコア
+        $setname = "m".$value."_clear_turn";
+        $$setname = $result["clear_turn"];
+        break;
+      else:
+        //順位
+        $setname = "m".$value."_ranking";
+        $$setname = "-";
+        //スコア
+        $setname = "m".$value."_clear_turn";
+        $$setname = "-";
+      endif;
+    endfor;
+  else:
+    //順位
+    $setname = "m".$value."_ranking";
+    $$setname = "-";
+    //スコア
+    $setname = "m".$value."_clear_turn";
+    $$setname = "-";
+  endif;
+endforeach;
+$stmt = null;
 $pdo = null;
 ?>
 <!DOCTYPE html>
@@ -104,7 +134,8 @@ $pdo = null;
       </header>
       <main>
         <div>
-          <img src="images/top.png" alt="TOP画像"><!--進行度やshopの購入状況で変わる-->
+          <!--進行度やshopの購入状況で変わる-->
+          <img src="images/top_<?php echo $news; ?>.png" alt="TOP画像">
           <section>
             <h2>進行状況</h2>
             <dl>
@@ -122,27 +153,32 @@ $pdo = null;
                 <th>順位</th>
                 <th>スコア</th>
               </tr>
-              <tr>
-                <td>-</td>
-                <td>-位</td>
-                <td>-T</td>
+<?php foreach($mapid_arr as $value): ?>
+                <tr>
+                <td><?php echo $mapname_arr[$value]; ?></td>
+  <?php
+  $setname = "m".$value."_ranking";
+  if($$setname == 1):
+  ?>
+                <td class="ranking1">
+  <?php elseif($$setname == 2): ?>
+                <td class="ranking2">
+  <?php elseif($$setname == 3): ?>
+                <td class="ranking3">
+  <?php else: ?>
+                <td>
+  <?php endif; ?>
+                <?php echo $$setname; ?>位</td>
+  <?php $setname = "m".$value."_clear_turn"; ?>
+                <td><?php echo $$setname; ?>T</td>
               </tr>
-              <tr>
-                <td>-</td>
-                <td>-位</td>
-                <td>-T</td>
-              </tr>
-              <tr>
-                <td>-</td>
-                <td>-位</td>
-                <td>-T</td>
-              </tr>
+<?php endforeach; ?>
             </table>
           </section>
         </div>
         <div>
-          <p class="flavor1">――ここに進行状況に応じたフレーバーテキスト</p>
-          <p class="flavor2">なるべく２行でテキスト表示したいというきもち</p>
+          <p class='flavor1'><?php echo $flavor[$news][1]; ?></p>
+          <p class='flavor2'><?php echo $flavor[$news][2]; ?></p>
         </div>
       </main>
       <footer>
