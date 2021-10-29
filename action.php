@@ -1,6 +1,10 @@
 <?php
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
+if(!isset($_SESSION["now_ap"])):
+  header('Location: index.php');
+  die();
+endif;
 require_once "tmp/db.php";
 require_once "tmp/turn_set.php";
 
@@ -26,11 +30,32 @@ endif;
 <?php
 if($_POST["action"] == "rest"):
   //休む
-  if($now_recast == 0):
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  //AP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+  $ap_limit = $_SESSION["now_ap"] + 1;
+  if($ap_limit <= $_SESSION["chara_ap"]):
+    //問題なし、通常処理
+    $recovery_ap = $ap_limit;
   else:
-    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+    //上限を入れ込む
+    $recovery_ap = $_SESSION["chara_ap"];
   endif;
+  //SP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+  $sp_limit = $_SESSION["now_sp"] + 1;
+  if($sp_limit <= $_SESSION["chara_sp"]):
+    //問題なし、通常処理
+    $recovery_sp = $sp_limit;
+  else:
+    //上限を入れ込む
+    $recovery_sp = $_SESSION["chara_sp"];
+  endif;
+
+  if($now_recast == 0):
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+  else:
+    $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+  endif;
+  $stmt->bindParam(":recovery_ap",$recovery_ap);
+  $stmt->bindParam(":recovery_sp",$recovery_sp);
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
@@ -71,6 +96,10 @@ elseif($_POST["action"] == "return"):
   <?php
 endif;
 $pdo = null;
+unset($_SESSION["now_ap"]);
+unset($_SESSION["now_sp"]);
+unset($_SESSION["chara_ap"]);
+unset($_SESSION["chara_sp"]);
 ?>
         </div>
       </main>

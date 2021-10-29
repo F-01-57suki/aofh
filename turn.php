@@ -7,11 +7,31 @@ if($action_flg):
   //パニックなら操作不能
   if($panic_flg):
     //強制で休む
-    if($now_recast == 0):
-      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+    //AP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+    $ap_limit = $now_ap + 1;
+    if($ap_limit <= $chara_ap):
+      //問題なし、通常処理
+      $recovery_ap = $ap_limit;
     else:
-      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+      //上限を入れ込む
+      $recovery_ap = $chara_ap;
     endif;
+    //SP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+    $sp_limit = $now_sp + 1;
+    if($sp_limit <= $chara_sp):
+      //問題なし、通常処理
+      $recovery_sp = $sp_limit;
+    else:
+      //上限を入れ込む
+      $recovery_sp = $chara_sp;
+    endif;
+    if($now_recast == 0):
+       $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+    else:
+      $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+    endif;
+    $stmt->bindParam(":recovery_ap",$recovery_ap);
+    $stmt->bindParam(":recovery_sp",$recovery_sp);
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
@@ -30,6 +50,10 @@ if($action_flg):
     <?php
   else:
   //行動選択画面を表示
+  $_SESSION["now_ap"] = $now_ap;
+  $_SESSION["now_sp"] = $now_sp;
+  $_SESSION["chara_ap"] = $chara_ap;
+  $_SESSION["chara_sp"] = $chara_sp;
   ?>
         <section>
           <h2 class="eve_h2">‐行動を選択‐</span></h2>
@@ -154,11 +178,31 @@ if(panic_flg == 0){
       //パニックなら操作不能
       if($panic_flg):
         //強制で休む
-        if($now_recast == 0):
-          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+        //AP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+        $ap_limit = $now_ap + 1;
+        if($ap_limit <= $chara_ap):
+          //問題なし、通常処理
+          $recovery_ap = $ap_limit;
         else:
-          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+1,`now_sp`=`now_sp`+1,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+          //上限を入れ込む
+          $recovery_ap = $chara_ap;
         endif;
+        //SP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+        $sp_limit = $now_sp + 1;
+        if($sp_limit <= $chara_sp):
+          //問題なし、通常処理
+          $recovery_sp = $sp_limit;
+        else:
+          //上限を入れ込む
+          $recovery_sp = $chara_sp;
+        endif;
+        if($now_recast == 0):
+          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1 WHERE `username`=:username");
+        else:
+          $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap,`now_sp`=:recovery_sp,`now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+        endif;
+        $stmt->bindParam(":recovery_ap",$recovery_ap);
+        $stmt->bindParam(":recovery_sp",$recovery_sp);
         $stmt->bindParam(":username",$_SESSION["username"]);
         $stmt->execute();
         $stmt = null;
@@ -178,6 +222,10 @@ if(panic_flg == 0){
       $stmt->bindParam(":username",$_SESSION["username"]);
       $stmt->execute();
       $stmt = null;
+      $_SESSION["now_ap"] = $now_ap;
+      $_SESSION["now_sp"] = $now_sp;
+      $_SESSION["chara_ap"] = $chara_ap;
+      $_SESSION["chara_sp"] = $chara_sp;
       ?>
       <section>
         <h2 class="eve_h2">‐行動を選択‐</span></h2>
