@@ -43,7 +43,7 @@ else:
   $stmt = null;
   //マップの取得
   $map_namearr = array();
-  $stmt = $pdo->prepare("SELECT `map_id`,`map_name` FROM `map_tbl`");
+  $stmt = $pdo->prepare("SELECT `map_id`,`map_name` FROM `map_tbl` ORDER BY `map_id` ASC");
   $stmt->execute();
   while($result = $stmt->fetch(PDO::FETCH_ASSOC)):
     $mapkey = $result["map_id"];
