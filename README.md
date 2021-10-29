@@ -12,7 +12,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- クリアデータを1マップにつき1つへ変更・クリア回数のカラム追加
+- ターン加算のタイミング（イケてない気がするので見直し中）
 
 ## 不具合
 ### 修正済み
@@ -21,7 +21,8 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 
 # 今後の実装予定
 ## 優先度高
-- ターン加算のタイミング（イケてない気がするので見直し中）
+- 仮画像を本画像へ
+- 仮テキストを本テキストへ
 
 ## 優先度低
 - キャラ選択に、各キャラのステータスを表示
