@@ -12,7 +12,6 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- HP/SPの回復上限
 - クリアデータを1マップにつき1つへ変更・クリア回数のカラム追加
 
 ## 不具合
