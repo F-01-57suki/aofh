@@ -123,19 +123,43 @@ endif;
               ＴＵＲＮ&emsp;<span id="now_turn"><?php echo $now_turn; ?></span>
             </p>
             <p>
-              <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span><span class="now_p"><?php echo $now_ap; ?></span>
-              &emsp;
-              <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span><span class="now_p"><?php echo $now_sp; ?></span>
-              <?php if($panic_flg): ?>
-              <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
-            <?php endif; ?>
-            </p>
-            <p>
             <?php if($now_recast == 0): ?>
                 <i class="fas fa-toolbox" id="skill_ok"></i><span class="info_t">&nbsp;スキル発動可能</span>
               <?php else: ?>
                 <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;ＣＴ：</span><span class="now_p"><?php echo $now_recast; ?></span>
               <?php endif; ?>
+              <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span>
+              <?php if($now_ap == $chara_ap): ?>
+              <span class="now_p max_p">
+              <?php elseif($now_ap <= ($chara_ap/3)): ?>
+              <span class="now_p min_p">
+              <?php elseif($now_ap <= ($chara_ap/2)): ?>
+              <span class="now_p mid_p">
+              <?php else: ?>
+              <span class="now_p">
+              <?php
+              endif;
+              echo $now_ap;
+              ?>
+              </span>
+              &emsp;
+              <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span>
+              <?php if($now_sp == $chara_sp): ?>
+              <span class="now_p max_p">
+              <?php elseif($now_sp <= ($chara_sp/3)): ?>
+              <span class="now_p min_p">
+              <?php elseif($now_sp <= ($chara_sp/2)): ?>
+              <span class="now_p mid_p">
+              <?php else: ?>
+              <span class="now_p">
+              <?php
+              endif;
+              echo $now_sp;
+              ?>
+              </span>
+              <?php if($panic_flg): ?>
+              <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
+            <?php endif; ?>
             </p>
           </div>
         </div>
