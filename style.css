@@ -576,6 +576,15 @@ footer{
   font-size: 2rem;
   text-shadow: 1px 0 0 rgb(255, 255, 255),0 1px 0 rgb(255, 255, 255),-1px 0 0 rgb(255, 255, 255),0 -1px 0 rgb(255, 255, 255);
 }
+.max_p{
+  color: rgb(0, 51, 153);
+}
+.mid_p{
+  color: rgb(204, 153, 0);
+}
+.min_p{
+  color: rgb(204, 0, 0);
+}
 
 #skill_ok{
   color: rgb(255, 255, 255);
