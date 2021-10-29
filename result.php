@@ -83,15 +83,46 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 $point = $result["point"];
 $stmt = null;
 
-//クリアデータの保存
-$stmt = $pdo->prepare("INSERT INTO `clear_save_tbl` (`username`,`map_id`,`chara_id`,`clear_turn`,`rank`) VALUES (:username,:map_id,:chara_id,:clear_turn,:rank)");
+//クリアデータを取得して比較
+$stmt = $pdo->prepare("SELECT `clear_turn` FROM `clear_save_tbl` WHERE `username`=:username AND `map_id`=:map_id");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->bindParam(":map_id",$map_id);
-$stmt->bindParam(":chara_id",$chara_id);
-$stmt->bindParam(":clear_turn",$now_turn);
-$stmt->bindParam(":rank",$rank);
 $stmt->execute();
-$stmt = null;
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+if($result):
+  //既存クリアセーブあり
+  $clear_turn = $result["clear_turn"];
+  $stmt = null;
+  if($clear_turn > $now_turn):
+    //ハイスコアならクリアデータの保存
+    $stmt = $pdo->prepare("UPDATE `clear_save_tbl` SET `chara_id`=:chara_id,`clear_turn`=:clear_turn,`rank`=:rank,`clear_count`=`clear_count`+1 WHERE `username`=:username AND `map_id`=:map_id");
+    $stmt->bindParam(":chara_id",$chara_id);
+    $stmt->bindParam(":clear_turn",$now_turn);
+    $stmt->bindParam(":rank",$rank);
+    $stmt->bindParam(":username",$_SESSION["username"]);
+    $stmt->bindParam(":map_id",$map_id);
+    $stmt->execute();
+    $stmt = null;
+  else:
+    //ハイスコアじゃなければクリア回数のみ加算
+    $stmt = $pdo->prepare("UPDATE `clear_save_tbl` SET `clear_count`=`clear_count`+1 WHERE `username`=:username AND `map_id`=:map_id");
+    $stmt->bindParam(":username",$_SESSION["username"]);
+    $stmt->bindParam(":map_id",$map_id);
+    $stmt->execute();
+    $stmt = null;
+  endif;
+else:
+  //既存クリアセーブ無し
+  $stmt = null;
+  $stmt = $pdo->prepare("INSERT INTO `clear_save_tbl` (`username`,`map_id`,`chara_id`,`clear_turn`,`rank`,`clear_count`) VALUES (:username,:map_id,:chara_id,:clear_turn,:rank,1)");
+  $stmt->bindParam(":username",$_SESSION["username"]);
+  $stmt->bindParam(":map_id",$map_id);
+  $stmt->bindParam(":chara_id",$chara_id);
+  $stmt->bindParam(":clear_turn",$now_turn);
+  $stmt->bindParam(":rank",$rank);
+  $stmt->execute();
+  $stmt = null;
+endif;
 
 //セーブ削除
 $stmt = $pdo->prepare("DELETE FROM `user_save_tbl` WHERE `username`=:username");

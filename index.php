@@ -5,15 +5,12 @@ require_once "tmp/flavorarr.php";
 
 $contflag = 1;
 //途中セーブの確認
-$stmt = $pdo->prepare("SELECT `map_id`,`chara_id`,`panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
+$stmt = $pdo->prepare("SELECT `save_id` FROM `user_save_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result):
   $contflag = 1;
-  $map_id = $result["map_id"];      //マップの背景用に取得
-  $chara_id = $result["chara_id"];  //TOP絵用に取得　ニュース使うからいらないかも
-  $panic_flg = $result["panic_flg"];//TOP絵用に取得　ニュース使うからいらないかも
 else:
   $contflag = 0;
 endif;
@@ -72,12 +69,19 @@ $mapid_arr = array();
 for($i = 1;$i <= $map_count;$i++):
   $mapid_arr[$i] = $i;
 endfor;
+
 foreach($mapid_arr as $value):
-  $stmt = $pdo->prepare("SELECT `clear_turn`,`username` FROM `clear_save_tbl` WHERE `map_id`=:map_id ORDER BY `clear_turn` ASC");
+  $stmt = $pdo->prepare("SELECT `clear_id` FROM `clear_save_tbl` WHERE `map_id`=:map_id AND `username`=:username");
   $stmt->bindParam(":map_id",$value);
+  $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $result = $stmt->fetch(PDO::FETCH_ASSOC);
   if($result):
+    //該当ユーザ＆マップのクリアデータがある
+    $stmt = null;
+    $stmt = $pdo->prepare("SELECT `clear_turn`,`username` FROM `clear_save_tbl` WHERE `map_id`=:map_id ORDER BY `clear_turn` ASC");
+    $stmt->bindParam(":map_id",$value);
+    $stmt->execute();
     for($i = 1;$result = $stmt->fetch(PDO::FETCH_ASSOC);$i++):
       if($result["username"] == $_SESSION["username"]):
         //順位
@@ -87,13 +91,6 @@ foreach($mapid_arr as $value):
         $setname = "m".$value."_clear_turn";
         $$setname = $result["clear_turn"];
         break;
-      else:
-        //順位
-        $setname = "m".$value."_ranking";
-        $$setname = "-";
-        //スコア
-        $setname = "m".$value."_clear_turn";
-        $$setname = "-";
       endif;
     endfor;
   else:
@@ -141,9 +138,9 @@ $pdo = null;
             <dl>
               <dt><i class="fas fa-coins"></i> 所持ポイント</dt>
               <dd><i class="fas fa-ellipsis-h"></i> <?php echo $point; ?>p</dd>
-              <dt><i class="fas fa-heartbeat"></i> 生存キャラ</dt>
+              <dt><i class="fas fa-eye"></i> 生存キャラ</dt>
               <dd><i class="fas fa-ellipsis-h"></i> <?php echo $lost; ?>/4</dd>
-              <dt><i class="fas fa-eye"></i> クリア状況</dt>
+              <dt><i class="fas fa-map"></i> クリア状況</dt>
               <dd><i class="fas fa-ellipsis-h"></i> <?php echo $clear_count; ?>/<?php echo $map_count; ?></dd>
             </dl>
             <h2 class="h2nplus2">総合ランキング</h2>
