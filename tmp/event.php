@@ -60,14 +60,32 @@ elseif($add_turn != 0)://turn追加イベント
   $stmt->execute();
   $stmt = null;
 elseif($add_ap != 0)://AP追加イベント
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=`now_ap`+:add_ap WHERE `username`=:username");
-  $stmt->bindParam(":add_ap",$add_ap);
+  //AP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+  $ap_limit = $now_ap + $add_ap;
+  if($ap_limit <= $chara_ap):
+    //問題なし、通常処理
+    $recovery_ap = $ap_limit;
+  else:
+    //上限を入れ込む
+    $recovery_ap = $chara_ap;
+  endif;
+  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_ap`=:recovery_ap WHERE `username`=:username");
+  $stmt->bindParam(":recovery_ap",$recovery_ap);
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
-elseif($add_sp != 0)://AP追加イベント
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_sp`=`now_sp`+:add_sp WHERE `username`=:username");
-  $stmt->bindParam(":add_sp",$add_sp);
+elseif($add_sp != 0)://SP追加イベント
+  //SP（現在値＋回復値＝最大値より大きい場合、最大値に回復）
+  $sp_limit = $now_sp + $add_sp;
+  if($sp_limit <= $chara_sp):
+    //問題なし、通常処理
+    $recovery_sp = $sp_limit;
+  else:
+    //上限を入れ込む
+    $recovery_sp = $chara_sp;
+  endif;
+  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_sp`=:recovery_sp WHERE `username`=:username");
+  $stmt->bindParam(":recovery_sp",$recovery_sp);
   $stmt->bindParam(":username",$_SESSION["username"]);
   $stmt->execute();
   $stmt = null;
