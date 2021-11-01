@@ -1,5 +1,15 @@
 <?php
-//バトル終了処理
+//バトル終了処理　　　！！！！！！！！１まとめる！
+//ターン加算
+if($now_recast == 0):
+  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1 WHERE `username`=:username");
+else:
+  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
+endif;
+$stmt->bindParam(":username",$_SESSION["username"]);
+$stmt->execute();
+$stmt = null;
+
 //セーブの敵IDを消去
 $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `enemy_id`=0 WHERE `username`=:username");
 $stmt->bindParam(":username",$_SESSION["username"]);

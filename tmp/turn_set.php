@@ -123,11 +123,11 @@ endif;
               ＴＵＲＮ&emsp;<span id="now_turn"><?php echo $now_turn; ?></span>
             </p>
             <p>
-            <?php if($now_recast == 0): ?>
-                <i class="fas fa-toolbox" id="skill_ok"></i><span class="info_t">&nbsp;スキル発動可能</span>
-              <?php else: ?>
-                <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;ＣＴ：</span><span class="now_p"><?php echo $now_recast; ?></span>
+              <?php if($panic_flg): ?>
+              <span id="panic_span">パニック発生中&nbsp;<i class="fas fa-exclamation"></i></span>
               <?php endif; ?>
+            </p>
+            <p>
               <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span>
               <?php if($now_ap == $chara_ap): ?>
               <span class="now_p max_p">
@@ -157,8 +157,12 @@ endif;
               echo $now_sp;
               ?>
               </span>
-              <?php if($panic_flg): ?>
-              <span id="panic_span"><br><i class="fas fa-exclamation fa-fw"></i>パニック発生<i class="fas fa-exclamation fa-fw"></i></span>
+            </p>
+            <p>
+            <?php if($now_recast == 0): ?>
+              <i class="fas fa-toolbox" id="skill_ok"></i><span class="info_t">&nbsp;スキル発動可</span>
+            <?php else: ?>
+              <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;発動まで&nbsp;</span><span class="now_p"><?php echo $now_recast; ?>T</span>
             <?php endif; ?>
             </p>
           </div>

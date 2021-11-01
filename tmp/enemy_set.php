@@ -1,14 +1,4 @@
 <?php
-//ターン追加
-if($now_recast == 0):
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1 WHERE `username`=:username");
-else:
-  $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1,`now_recast`=`now_recast`-1 WHERE `username`=:username");
-endif;
-$stmt->bindParam(":username",$_SESSION["username"]);
-$stmt->execute();
-$stmt = null;
-
 //マップの敵idを順に配列へ
 $enemyarr = array(0 => 0);
 $stmt = $pdo->prepare("SELECT `enemy_id` FROM `enemy_tbl` WHERE `map_id`=:map_id");
