@@ -21,7 +21,7 @@ if($result):
     <div id="wrapper">
       <header>
         <h1><a href="index.php"><img src="images/title_mini.png" alt="タイトルロゴ"></a></h1>
-        <p><i class="fas fa-exclamation-triangle"></i> ご注意下さい <i class="fas fa-exclamation-triangle"></i></p>
+        <p><i class="fas fa-exclamation-triangle fa-fw"></i> ご注意下さい <i class="fas fa-exclamation-triangle fa-fw"></i></p>
       </header>
       <main>
         <p>進行中のセーブデータがあります！<br><span>現在のセーブを破棄し</span>、新たにゲームを開始しますか？</p>
