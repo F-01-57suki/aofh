@@ -7,7 +7,7 @@
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 /*-* 余白リセット *-*-*-*-*-*-*-*-*-*-*-*/
-*{
+body,header,nav,main,footer,div,section,p,h1,h2,h3,ul,li,dl,dt,dd,table,tr,th,td,form,input,img,i{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -567,15 +567,19 @@ footer{
 }
 
 #info{
-  margin-top: 20px;
-  text-align: center;
   font-size: 1.8rem;
   font-weight: bold;
+  text-align: left;
+}
+#info>p:nth-child(-n+2){
   text-align: right;
 }
-#info>p:last-child{
-  margin-top: 10px;
+#info>p:nth-child(3){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .info_t{
   font-size: 1.4rem;
 }
