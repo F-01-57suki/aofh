@@ -72,6 +72,25 @@ else:
     $$key = $value;//キャラ名変数に生存フラグを入れる
   endforeach;
   $stmt = null;
+  //キャラステータスの取得
+  $cidarr = array("a" => "1","t" => "2","m" => "3","y" => "4");
+  foreach($cidarr as $key => $value):
+    $cstarr["$key"] = array("chara_id" => "$value");
+    $stmt = $pdo->prepare("SELECT `chara_ap`,`chara_sp`,`chara_speed`,`chara_stealth` FROM `chara_tbl` WHERE `chara_id`=:chara_id");
+    $stmt->bindParam(":chara_id",$cstarr["$key"]["chara_id"]);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $cstarr["$key"]["chara_ap"] = $result["chara_ap"];
+    $cstarr["$key"]["chara_sp"] = $result["chara_sp"];
+    $cstarr["$key"]["chara_speed"] = $result["chara_speed"];
+    $cstarr["$key"]["chara_stealth"] = $result["chara_stealth"];
+    $stmt = null;
+    //ゲージ算出
+    $cstarr["$key"]["ap_gage"] = ($cstarr["$key"]["chara_ap"] / 40) * 100;
+    $cstarr["$key"]["sp_gage"] = ($cstarr["$key"]["chara_sp"] / 40) * 100;
+    $cstarr["$key"]["speed_gage"] = ($cstarr["$key"]["chara_speed"] / 10) * 100;
+    $cstarr["$key"]["stealth_gage"] = ($cstarr["$key"]["chara_stealth"] / 10) * 100;
+  endforeach;
   $pdo = null;
   ?>
   <!DOCTYPE html>
@@ -130,22 +149,126 @@ else:
                         <img src="images/chara_y0.png" alt="キャラ画像（赤羽）"><?php endif; ?>
                       </td>
                     </tr>
+                    <tr id="cst_ap">
+                      <td>
+                        <div>
+                          <i class="fas fa-heartbeat fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="aap_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-heartbeat fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="tap_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-heartbeat fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="mrap_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-heartbeat fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="yap_gage"></div></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="cst_sp">
+                      <td>
+                        <div>
+                          <i class="fas fa-brain fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="asp_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-brain fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="tsp_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-brain fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="msp_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-brain fa-fw fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="ysp_gage"></div></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="cst_speed">
+                      <td>
+                        <div>
+                          <i class="fas fa-running fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="aspeed_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-running fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="tspeed_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-running fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="mspeed_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="fas fa-running fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="yspeed_gage"></div></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="cst_stealth">
+                      <td>
+                        <div>
+                          <i class="far fa-eye-slash fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="astealth_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="far fa-eye-slash fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="tstealth_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="far fa-eye-slash fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="mstealth_gage"></div></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <i class="far fa-eye-slash fa-fw"></i>&ensp;
+                          <div class="gage_all"><div id="ystealth_gage"></div></div>
+                        </div>
+                      </td>
+                    </tr>
                     <tr>
                       <td>
-                        <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[1]; ?></p>
+                        <p class="skill_h"><i class="fas fa-toolbox fa-fw"></i> <?php echo $skill_namearr[1]; ?></p>
                         <p class="skill_d"><?php echo $skill_effectarr[1]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
                       </td>
                       <td>
-                        <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[2]; ?></p>
-                        <p class="skill_d"><?php echo $skill_effectarr[2]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                        <p class="skill_h"><i class="fas fa-toolbox fa-fw"></i> <?php echo $skill_namearr[2]; ?></p>
+                        <p class="skill_d"><?php echo $skill_effectarr[2]; ?><br>（使用間隔<?php echo $skill_recastarr[2]; ?>T）</p>
                       </td>
                       <td>
-                        <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[3]; ?></p>
-                        <p class="skill_d"><?php echo $skill_effectarr[3]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                        <p class="skill_h"><i class="fas fa-toolbox fa-fw"></i> <?php echo $skill_namearr[3]; ?></p>
+                        <p class="skill_d"><?php echo $skill_effectarr[3]; ?><br>（使用間隔<?php echo $skill_recastarr[3]; ?>T）</p>
                       </td>
                       <td>
-                        <p class="skill_h"><i class="fas fa-toolbox"></i> <?php echo $skill_namearr[4]; ?></p>
-                        <p class="skill_d"><?php echo $skill_effectarr[4]; ?><br>（使用間隔<?php echo $skill_recastarr[1]; ?>T）</p>
+                        <p class="skill_h"><i class="fas fa-toolbox fa-fw"></i> <?php echo $skill_namearr[4]; ?></p>
+                        <p class="skill_d"><?php echo $skill_effectarr[4]; ?><br>（使用間隔<?php echo $skill_recastarr[4]; ?>T）</p>
                       </td>
                     </tr>
                     <tr>
@@ -181,6 +304,43 @@ else:
         </footer>
       </div>
       <?php require_once "tmp/ng_js.php"; ?>
+      <script>
+      const aap_gage = document.getElementById("aap_gage");
+      aap_gage.style.width = "<?php echo $cstarr["a"]["ap_gage"]; ?>%";
+      const asp_gage = document.getElementById("asp_gage");
+      asp_gage.style.width = "<?php echo $cstarr["a"]["sp_gage"]; ?>%";
+      const aspeed_gage = document.getElementById("aspeed_gage");
+      aspeed_gage.style.width = "<?php echo $cstarr["a"]["speed_gage"]; ?>%";
+      const astealth_gage = document.getElementById("astealth_gage");
+      astealth_gage.style.width = "<?php echo $cstarr["a"]["stealth_gage"]; ?>%";
+
+      const tap_gage = document.getElementById("tap_gage");
+      tap_gage.style.width = "<?php echo $cstarr["t"]["ap_gage"]; ?>%";
+      const tsp_gage = document.getElementById("tsp_gage");
+      tsp_gage.style.width = "<?php echo $cstarr["t"]["sp_gage"]; ?>%";
+      const tspeed_gage = document.getElementById("tspeed_gage");
+      tspeed_gage.style.width = "<?php echo $cstarr["t"]["speed_gage"]; ?>%";
+      const tstealth_gage = document.getElementById("tstealth_gage");
+      tstealth_gage.style.width = "<?php echo $cstarr["t"]["stealth_gage"]; ?>%";
+
+      const mrap_gage = document.getElementById("mrap_gage");
+      mrap_gage.style.width = "<?php echo $cstarr["m"]["ap_gage"]; ?>%";
+      const msp_gage = document.getElementById("msp_gage");
+      msp_gage.style.width = "<?php echo $cstarr["m"]["sp_gage"]; ?>%";
+      const mspeed_gage = document.getElementById("mspeed_gage");
+      mspeed_gage.style.width = "<?php echo $cstarr["m"]["speed_gage"]; ?>%";
+      const mstealth_gage = document.getElementById("mstealth_gage");
+      mstealth_gage.style.width = "<?php echo $cstarr["m"]["stealth_gage"]; ?>%";
+
+      const yap_gage = document.getElementById("yap_gage");
+      yap_gage.style.width = "<?php echo $cstarr["y"]["ap_gage"]; ?>%";
+      const ysp_gage = document.getElementById("ysp_gage");
+      ysp_gage.style.width = "<?php echo $cstarr["y"]["sp_gage"]; ?>%";
+      const yspeed_gage = document.getElementById("yspeed_gage");
+      yspeed_gage.style.width = "<?php echo $cstarr["y"]["speed_gage"]; ?>%";
+      const ystealth_gage = document.getElementById("ystealth_gage");
+      ystealth_gage.style.width = "<?php echo $cstarr["y"]["stealth_gage"]; ?>%";
+      </script>
     </body>
   </html>
 <?php endif; ?>

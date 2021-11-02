@@ -446,6 +446,36 @@ footer{
   font-weight: bold;
 }
 
+#cst_ap>td{
+  padding-top: 10px;
+}
+#cst_ap .gage_all,#cst_sp .gage_all,#cst_speed .gage_all,#cst_stealth .gage_all{
+  width: 100%;
+}
+#cst_ap>td>div,#cst_sp>td>div,#cst_speed>td>div,#cst_stealth>td>div{
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gage_all{
+  height: 8px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: rgba(0, 0, 0,0.5);
+  border: 1px solid rgb(255, 255, 255);
+}
+#aap_gage,#asp_gage,#aspeed_gage,#astealth_gage,#tap_gage,#tsp_gage,#tspeed_gage,#tstealth_gage,#mrap_gage,#msp_gage,#mspeed_gage,#mstealth_gage,#yap_gage,#ysp_gage,#yspeed_gage,#ystealth_gage{
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(rgb(0, 102, 255), rgb(0, 51, 102));
+  border-top: 1px solid rgb(51, 204, 255);
+  border-right: 1px solid rgb(51, 204, 255);
+}
+
+
 /*-* イントロダクション *-*-*-*-*-*-*-*-*-*-*-*/
 #intro h1{
   display: flex;
