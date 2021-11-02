@@ -12,7 +12,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - 一通りのゲームの流れ（済）
 
 ## 着手中
-- キャラ選択に、各キャラのステータスを表示
+- 初回ログイン時のチュートリアル
 
 ## 不具合
 ### 修正済み
@@ -22,7 +22,6 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 # 今後の実装予定
 ## 優先度順
 - 仮画像を本画像へ、仮テキストを本テキストへ
-- 初回ログイン時のチュートリアル
 
 ## 未定
 - ランキング同率○位の処理について考える（今どうなってるか調査含め
