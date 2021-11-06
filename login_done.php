@@ -3,7 +3,7 @@ require_once "tmp/post.php";
 require_once "tmp/session_out.php";
 require_once "tmp/db.php";
 
-$stmt = $pdo->prepare("SELECT `pass` FROM `user_tbl` WHERE `username`=:username");
+$stmt = $pdo->prepare("SELECT `pass`,`news` FROM `user_tbl` WHERE `username`=:username");
 $stmt->bindParam(":username",$_POST["username"]);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -12,6 +12,7 @@ if($result):
     //ログイン成功
     $_SESSION['username'] = $_POST["username"];
     $_SESSION['pass'] = $_POST["pass"];
+    $_SESSION['news'] = $result["news"];
     $stmt = null;
     $pdo = null;
     header('Location: index.php');

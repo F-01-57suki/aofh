@@ -29,7 +29,7 @@ if(count($errors)!==0):
   require_once "tmp/error.php";
 else:
   //user_tbl
-  $news = "none";
+  $news = "tutorial";
   $stmt = $pdo->prepare("INSERT INTO `user_tbl` (`username`,`pass`,`point`,`lost_a`,`lost_t`,`lost_m`,`lost_y`,`news`) VALUES (:username,:pass,10,0,0,0,0,:news)");
   $stmt->bindParam(":username",$_SESSION['ucheck']);
   $stmt->bindParam(":pass",$pass);
@@ -39,6 +39,7 @@ else:
   //ログイン情報の入れ込み
   $_SESSION['username'] = $_SESSION['ucheck'];
   $_SESSION['pass'] = $_SESSION['pcheck'];
+  $_SESSION['news'] = $news;
   unset($_SESSION['ucheck']);
   unset($_SESSION['pcheck']);
 
