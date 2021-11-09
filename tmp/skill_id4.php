@@ -38,7 +38,7 @@ if($_SESSION["chara_id"] == 4 and $_SESSION["enemy_type"] != "ghost"):
   ?>
     <section>
       <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
-      <p class="eve_p">&emsp;実体を持つ怪異であれば、赤羽の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
+      <p class="eve_p">&emsp;錆を覆い、滴るのは返り血か――己の血か。それを袖で乱暴に拭い、赤羽は笑う。<br>「雑魚が。二度と逆らうなよ」<span class="system_span">&emsp;スキル効果により、APが<?php echo $add_damage; ?>減少。</span></p>
       </section>
   </div>
   <div>

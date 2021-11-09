@@ -123,7 +123,7 @@ endif;
               ＴＵＲＮ&emsp;<span id="now_turn"><?php echo $now_turn; ?></span>
             </p>
             <p>
-              <?php if($panic_flg): ?>
+              <?php if($panic_flg == 1): ?>
               <span id="panic_span">パニック発生中&nbsp;<i class="fas fa-exclamation"></i></span>
               <?php endif; ?>
             </p>

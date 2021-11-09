@@ -31,7 +31,7 @@ if($_SESSION["chara_id"] == 2 and $_SESSION["enemy_type"] == "ghost"):
   ?>
     <section>
       <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐古びたカメラ‐</span></h2>
-      <p class="eve_p">&emsp;相手が怨霊の類であれば、蘆野の得意とするところだ。<br><span class="system_span">&emsp;スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
+      <p class="eve_p">「悪いけど、どいてくれる？」<br>&emsp;蘆野がカメラを構え、シャッターを切ると――眩いフラッシュが、辺りも、怨霊も、真っ白に染め上げた。<span class="system_span">&emsp;スキル効果により、SPが<?php echo $addsp; ?>回復した。</span></p>
     </section>
   </div>
   <div>
