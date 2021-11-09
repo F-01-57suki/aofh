@@ -9,8 +9,8 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
   - マップ一覧、敵一覧を作成予定…
 
 # 現在の進捗
+- 登録～チュートリアル～ゲーム内容まで一通り
 - マップID１完成
-- チュートリアル完成
 
 # 今後の実装予定
 - マップID2～3の実装
