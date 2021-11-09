@@ -42,7 +42,7 @@ elseif($_POST["battle"] == "purify" and $now_recast == 0):
 elseif($_POST["battle"] == "stealth"):
   //キャラのステルスから敵の賢さを引き、判定へ
   $stealth_check = ($_SESSION["chara_stealth"])-($_SESSION["enemy_wisdom"]);
-  $stealth_lottery = mt_rand(1,10);
+  $stealth_lottery = mt_rand(1,100);
 
   //lotteryがcheck以下なら成功
   if($stealth_lottery <= $stealth_check):
@@ -109,9 +109,6 @@ elseif($_POST["battle"] == "stealth"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-<!-- 消す/////////////////////////////////////////////////////////////////////////////// -->
-        <?php echo "<p>キャラ",$_SESSION["chara_stealth"],"-敵",$_SESSION["enemy_wisdom"],"、判定",$stealth_check,"、確率",$stealth_lottery,"</p>"; ?>
-<!-- /////////////////////////////////////////////////////////////////////////////////// -->
         <p>&emsp;慌てて隠れるも、すぐに見つかってしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
         <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
@@ -125,7 +122,7 @@ elseif($_POST["battle"] == "stealth"):
 elseif($_POST["battle"] == "speed"):
   //キャラの速度から敵の速度を引き、判定へ
   $speed_check = ($_SESSION["chara_speed"])-($_SESSION["enemy_speed"]);
-  $speed_lottery = mt_rand(1,10);
+  $speed_lottery = mt_rand(1,100);
   //狩場スキル発動
   require_once "tmp/skill_id3.php";
   //lotteryがcheck以下なら成功
@@ -189,9 +186,6 @@ elseif($_POST["battle"] == "speed"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-<!-- 消す/////////////////////////////////////////////////////////////////////////////// -->
-<?php echo "<p>キャラ",$_SESSION["chara_speed"],"-敵",$_SESSION["enemy_speed"],"、判定",$speed_check,"、確率",$speed_lottery,"</p>"; ?>
-<!-- /////////////////////////////////////////////////////////////////////////////////// -->
         <p>&emsp;走って逃げるも、すぐに追いつかれてしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
         <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
