@@ -20,12 +20,20 @@ else:
   $stmt = null;
 endif;
 
+//キャラ名取得
+$stmt = $pdo->prepare("SELECT `chara_name` FROM `chara_tbl` WHERE `chara_id`=:chara_id");
+$stmt->bindParam(":chara_id",$chara_id);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$chara_name = $result["chara_name"];
+$stmt = null;
+
 //マップサイズと評価を取得
 $stmt = $pdo->prepare("SELECT `map_name`,`map_size`,`rank_s_turn`,`rank_a_turn`,`rank_b_turn`,`rank_s_point`,`rank_a_point`,`rank_b_point`,`rank_c_point` FROM `map_tbl` WHERE `map_id`=:map_id");
 $stmt->bindParam(":map_id",$map_id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$result)://マップ無いはダメなので判定不要かも？考え中…
+if(!$result):
   $stmt = null;
   $pdo = null;
   header('Location: index.php');
@@ -51,16 +59,20 @@ if($now_adv < $map_size):
 endif;
 
 //結果の判定
-if($now_turn <= $rank_s_turn)://S判定
+if($now_turn <= $rank_s_turn):
+  //S判定
   $rank = "s";
   $addp = $rank_s_point;
-elseif($now_turn <= $rank_a_turn)://A判定
+elseif($now_turn <= $rank_a_turn):
+  //A判定
   $rank = "a";
   $addp = $rank_a_point;
-elseif($now_turn <= $rank_b_turn)://B判定
+elseif($now_turn <= $rank_b_turn):
+  //B判定
   $rank = "b";
   $addp = $rank_b_point;
-else://C判定
+else:
+  //C判定
   $rank = "c";
   $addp = $rank_c_point;
 endif;
@@ -161,8 +173,15 @@ $pdo = null;
             </tr>
           </table>
           <p>クリアランクに応じ、ポイントを獲得しました。<br>現在の所持ポイントが「<span class="system_span"><?php echo $point; ?>p」</span>になりました。</p>
-          <a href="index.php">TOPへ戻る</a>
         </div>
+        <div id="outro">
+            <p class="asterisk">＊＊＊</p>
+            <?php
+            $filepass = "story/out_m".$map_id.".php";
+            require_once "$filepass";
+            ?>
+            <a href="index.php"><img src="images/topbtn.png" alt="TOPへ戻る"></a>
+          </div>
       </main>
       <footer>
         <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>

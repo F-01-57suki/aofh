@@ -1,6 +1,15 @@
 <?php
 require_once "tmp/post.php";
 require_once "tmp/session_in.php";
+//後で消す！/////////////////////////////////////////////////////
+if($_POST["stage"] == "2"):
+  header('Location: story/in_m2.php');
+  die();
+elseif($_POST["stage"] == "3"):
+  header('Location: story/in_m3.php');
+  die();
+endif;
+////////////////////////////////////////////////////////////////
 require_once "tmp/db.php";
 
 //キャラデータの確認

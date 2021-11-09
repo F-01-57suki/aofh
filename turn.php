@@ -39,12 +39,9 @@ if($action_flg):
     ?>
         <section>
           <h2 class="eve_h2 ng">‐パニック発生中‐</span></h2>
-            <p>&emsp;うまく息ができない……。なすすべもなく、その場にうずくまった。<br><span class="system_span">&emsp;APが1回復。SPが1回復。</span></p>
+          <p>&emsp;うまく息ができない……。なすすべもなく、その場にうずくまった。<br><span class="system_span">&emsp;APが1回復。SPが1回復。</span></p>
           <a href="turn.php" class="next_turn">次のターンへ</a>
         </section>
-      </div>
-      <div>
-        <a href="turn.php" class="next_turn">次のターンへ</a>
       </div>
     </main>
     <?php
@@ -116,8 +113,12 @@ if(panic_flg == 0){
     $_SESSION["chara_speed"] = $chara_speed;
     $_SESSION["chara_stealth"] = $chara_stealth;
     $stmt = null;
+    require_once "tmp/enemy_arr.php";
+    $enemy_type = $_SESSION["enemy_type"];
     ?>
     <script>
+      const battle_p = document.getElementById("battle_p");
+      battle_p.innerHTML = "<?php echo $enemyarr[$enemy_type]; ?>"
       battle_ui.style.backgroundImage = "url(images/<?php echo $_SESSION["enemy_type"]; ?>.jpg)";
     </script>
         <form action="battle.php" method="post" id="action">

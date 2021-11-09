@@ -7,8 +7,12 @@ if(!isset($_SESSION["enemy_name"])):
 endif;
 require_once "tmp/db.php";
 require_once "tmp/turn_set.php";
+require_once "tmp/enemy_arr.php";
+$enemy_type = $_SESSION["enemy_type"];
 ?>
 <script>
+  const battle_p = document.getElementById("battle_p");
+  battle_p.innerHTML = "<?php echo $enemyarr[$enemy_type]; ?>"
   battle_ui.style.backgroundImage = "url(images/<?php echo $_SESSION["enemy_type"]; ?>.jpg)";
 </script>
 <?php
@@ -47,10 +51,8 @@ elseif($_POST["battle"] == "stealth"):
       <section>
         <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
         <p class="eve_p">&emsp;物陰に隠れ、息を殺す。早鐘を打つ心臓を、必死で抑える。<br>&emsp;不気味な気配は暫く近くを探していたようだが、――やがて諦めたのか、どこかへと去っていった……。</p>
+        <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
     </div>
     <?php
   else:
@@ -65,7 +67,7 @@ elseif($_POST["battle"] == "stealth"):
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
-    //現在のAP/SPを取得！！！！！！！！！！！１１
+    //現在のAP/SPを取得
     $stmt = $pdo->prepare("SELECT `now_ap`,`now_sp`,`panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
@@ -107,14 +109,12 @@ elseif($_POST["battle"] == "stealth"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-        <!-- /////////////////////////////////////////////////////////////////////////////// -->
+<!-- 消す/////////////////////////////////////////////////////////////////////////////// -->
         <?php echo "<p>キャラ",$_SESSION["chara_stealth"],"-敵",$_SESSION["enemy_wisdom"],"、判定",$stealth_check,"、確率",$stealth_lottery,"</p>"; ?>
-<!-- /////////////////////////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////////////////////////////////////////////////////////// -->
         <p>&emsp;慌てて隠れるも、すぐに見つかってしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
     </div>
     <?php
 
@@ -135,10 +135,8 @@ elseif($_POST["battle"] == "speed"):
       <section>
         <h2 class="eve_h2 ok">‐回避に成功‐</span></h2>
         <p>&emsp;考えるよりも先に、体が動いていた。無我夢中で走っていた。<br>&emsp;そして、――やがて疲れて立ち止まると、もう不気味な気配は追ってきていなかった。</p>
+        <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
     </div>
     <?php
   else:
@@ -149,7 +147,7 @@ elseif($_POST["battle"] == "speed"):
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
     $stmt = null;
-    //現在のAP/SPを取得！！！！！！！！！！！１１
+    //現在のAP/SPを取得
     $stmt = $pdo->prepare("SELECT `now_ap`,`now_sp`,`panic_flg` FROM `user_save_tbl` WHERE `username`=:username");
     $stmt->bindParam(":username",$_SESSION["username"]);
     $stmt->execute();
@@ -191,16 +189,12 @@ elseif($_POST["battle"] == "speed"):
     ?>
       <section>
         <h2 class="eve_h2 ng">‐回避失敗‐</span></h2>
-
-<!-- /////////////////////////////////////////////////////////////////////////////// -->
+<!-- 消す/////////////////////////////////////////////////////////////////////////////// -->
 <?php echo "<p>キャラ",$_SESSION["chara_speed"],"-敵",$_SESSION["enemy_speed"],"、判定",$speed_check,"、確率",$speed_lottery,"</p>"; ?>
-<!-- /////////////////////////////////////////////////////////////////////////////// -->
-
+<!-- /////////////////////////////////////////////////////////////////////////////////// -->
         <p>&emsp;走って逃げるも、すぐに追いつかれてしまった！<br><span class="system_span">&emsp;怪異との接触により、APが<?php echo $add_damage; ?>減少。SPが<?php echo $_SESSION["add_fear"]; ?>減少。</span></p>
+        <a href="turn.php" class="next_turn">次のターンへ</a>
       </section>
-    </div>
-    <div>
-      <a href="turn.php" class="next_turn">次のターンへ</a>
     </div>
     <?php
   endif;

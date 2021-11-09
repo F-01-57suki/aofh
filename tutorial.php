@@ -11,7 +11,6 @@ endif;
 if($_SESSION['news'] != 'tutorial'):
   header('Location: index.php');
 endif;
-//require_once "tmp/db.php";
 
 if(isset($_POST["tutorial"])):
   if($_POST["tutorial"] == "move"):
@@ -198,7 +197,7 @@ if(isset($_POST["tutorial"])):
           <div id="contwrap">
             <img src="images/dkdk_4.png" alt="選択キャラクター（接敵中）" id="charaimg">
             <section>
-              <p class="tutorial_p">やっぱり出ましたねえ。残念ながら、除霊は専門外なので……ま、逃げるなり隠れるなりで、なんとかやり過ごしましょうか。</p>
+              <p class="tutorial_p">お出ましですね。残念ながら、除霊は専門外なので……ま、逃げるなり隠れるなりで、なんとかやり過ごしましょうか。</p>
               <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
               <form action="tutorial.php" method="post" id="action">
                 <button type="submit" name="tutorial" value="battleok" class="action_btn">隠れる</button><br>
@@ -774,11 +773,82 @@ if(isset($_POST["tutorial"])):
             <div id="contwrap">
               <img src="images/panik_4.png" alt="選択キャラクター" id="charaimg">
               <section>
-                <p class="tutorial_p">あ、怪異を直視しすぎるとSPが減って、パニック状態……行動不能になりますよ。0の瞬間にペナルティで-3されるので要注意です。</p>
+                <p class="tutorial_p">あ、怪異を見るとSPが減って、0でパニック状態になりますよ。ペナルティでSPが-3され、行動不能となるので注意です。</p>
                 <h2 class="eve_h2 ng">‐パニック発生中‐</span></h2>
                 <p>&emsp;パニックのため、行動不能。<br><span class="system_span">&emsp;APが1回復。SPが1回復。</span></p>
                 <form action="tutorial.php" method="post">
-                  <button type="submit" name="tutorial" value="end" class="next_turn_btn">次のターンへ</button><br>
+                  <button type="submit" name="tutorial" value="lost" class="next_turn_btn">次のターンへ</button><br>
+                </form>
+              </section>
+            </div>
+          </main>
+          <footer>
+            <p>copyright &copy; <?php echo date('Y'); ?> Miyashita.</p>
+          </footer>
+        </div>
+        <script>
+          const gage_now = document.getElementById("gage_now");
+          gage_now.style.width = "0%";
+        </script>
+        <?php require_once "tmp/ng_js.php"; ?>
+      </body>
+    </html>
+    <?php
+  endif;
+
+  if($_POST["tutorial"] == "lost"):
+    //チュートリアル７：キャラのロストについて
+    ?>
+    <!DOCTYPE html>
+    <html lang="ja">
+      <head>
+        <meta charset="UTF-8">
+        <title>AVACHIofHORROR（仮）</title>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+      </head>
+      <body id="turn" class="map0">
+        <div id="wrapper">
+          <header>
+            <div>
+              <h1><img src="images/title_mini.png" alt="タイトルロゴ"></h1>
+              <p>～チュートリアル中～</p>
+            </div>
+            <div id="turn_header">
+              <div id="map_gage">
+                <div id="gage_title"><p>0%&nbsp;&nbsp;</p><p>&nbsp;50%</p><p>100%</p></div>
+                <div id="gage_all"><div id="gage_now"></div></div>
+                <p>残りの距離&emsp;3</p>
+              </div>
+              <div id="info">
+                <p>
+                  ＴＵＲＮ&emsp;<span id="now_turn">6</span>
+                </p>
+                <p>
+                  <span id="panic_span">パニック発生中&nbsp;<i class="fas fa-exclamation"></i></span>
+                </p>
+                <p>
+                  <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span>
+                  <span class="now_p max_p">7</span>
+                  &emsp;
+                  <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span>
+                  <span class="now_p">-3</span>
+                </p>
+                <p>
+                <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;発動まで&nbsp;</span><span class="now_p">2T</span>
+                </p>
+              </div>
+            </div>
+          </header>
+          <main>
+            <div id="contwrap">
+              <img src="images/hutu_4.png" alt="選択キャラクター" id="charaimg">
+              <section>
+                <p class="tutorial_p">APの方が0になったら？　まあ……、生死はさておき、現実に戻っては来られないでしょうね。</p>
+                <h2 class="eve_h2 ng">‐キャラのロスト‐</span></h2>
+                <p><span class="system_span">&emsp;APが0になると、以降はそのキャラが使用不可となる。</span></p>
+                <form action="tutorial.php" method="post">
+                  <button type="submit" name="tutorial" value="end" class="next_turn_btn">チュートリアルを終了</button><br>
                 </form>
               </section>
             </div>
@@ -851,7 +921,7 @@ if(isset($_POST["tutorial"])):
             <p>　こちらが何かを言うよりも早く、赤羽はスマホの液晶をこちらに向ける。――そこには、美人の女性たちが肩を寄せ合い、微笑んでいる写真が表示されていた。</p>
             <p>「明日から、よろしくお願いしますね」</p>
             <p>　――筋がいい。その言葉を信じ、もう少し頑張ってみることにした。</p>
-            <a href="index.php">TOPページへ</a>
+            <a href="index.php"><img src="images/topbtn.png" alt="TOPへ戻る"></a>
           </div>
       </main>
       <footer>
