@@ -125,7 +125,7 @@ if(isset($_POST["tutorial"])):
           <div id="contwrap">
             <img src="images/hutu_4.png" alt="選択キャラクター" id="charaimg">
             <section>
-              <p class="tutorial_p">先へ進むと進捗が加算され、残り距離が0でクリアです。どんどん進んじゃってください。</p>
+              <p class="tutorial_p">先へ進むと進捗が加算され、残りの距離が0になればクリアです。どんどん進んじゃってください。</p>
               <h2 class="eve_h2 ok">‐進む‐</span></h2>
               <p>&emsp;周囲を警戒しながら、慎重な足取りで暗闇の先へと進んだ。</p>
               <form action="tutorial.php" method="post" id="action">
@@ -192,12 +192,12 @@ if(isset($_POST["tutorial"])):
         <main>
           <div id="battle_ui">
             <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
-            <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+            <p id="battle_p">彷徨うたましい、未練に縛られたものたち<br>生者への影響力は小さいが、その姿を見るだけで血の気が引く</p>
           </div>
           <div id="contwrap">
             <img src="images/dkdk_4.png" alt="選択キャラクター（接敵中）" id="charaimg">
             <section>
-              <p class="tutorial_p">お出ましですね。残念ながら、除霊は専門外なので……ま、逃げるなり隠れるなりで、なんとかやり過ごしましょうか。</p>
+              <p class="tutorial_p">早速お出ましですね。残念ながら、除霊は専門外なので……ま、逃げるなり隠れるなりで、なんとかやり過ごしましょうか。</p>
               <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
               <form action="tutorial.php" method="post" id="action">
                 <button type="submit" name="tutorial" value="battleok" class="action_btn">隠れる</button><br>
@@ -270,7 +270,7 @@ if(isset($_POST["tutorial"])):
         <main>
           <div id="battle_ui">
             <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
-            <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+            <p id="battle_p">彷徨うたましい、未練に縛られたものたち<br>生者への影響力は小さいが、その姿を見るだけで血の気が引く</p>
           </div>
           <div id="contwrap">
             <img src="images/dkdk_4.png" alt="選択キャラクター（接敵中）" id="charaimg">
@@ -346,7 +346,7 @@ if(isset($_POST["tutorial"])):
             <div id="contwrap">
               <img src="images/hutu_4.png" alt="選択キャラクター" id="charaimg">
               <section>
-                <p class="tutorial_p">……まだ追って来るようなので、来た道を戻りますか。早めに距離を取れば、奴らもこちらを見失います。</p>
+                <p class="tutorial_p">……まだ追って来るようなので、いったん来た道を戻りますか。早めに距離を取れば、奴らもこちらを見失います。</p>
                 <h2 class="eve_h2">‐行動を選択‐</span></h2>
                 <form action="tutorial.php" method="post" id="action">
                   <button type="submit" name="tutorial" value="returnok" class="action_btn">道を戻る</button><br>
@@ -548,7 +548,7 @@ if(isset($_POST["tutorial"])):
             <div id="contwrap">
               <img src="images/hutu_4.png" alt="選択キャラクター" id="charaimg">
               <section>
-                <p class="tutorial_p">休んだ気がしない？　状況が状況ですし、気休めにしかならないでしょうね。AP/SPは余裕を見て管理しましょう。</p>
+                <p class="tutorial_p">休んだ気がしない？　状況が状況ですし、まあ、気休めにしかならないでしょうね。AP/SPは余裕を見て管理しましょう。</p>
                 <h2 class="eve_h2 ok">‐休憩‐</span></h2>
                 <p>&emsp;休めそうな場所を見つけ、少し休憩した。<br><span class="system_span">APが1回復。SPが1回復。</span></p>
                 <form action="tutorial.php" method="post" id="action">
@@ -615,12 +615,12 @@ if(isset($_POST["tutorial"])):
         <main>
           <div id="battle_ui">
             <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
-            <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+            <p id="battle_p">異界の者、異形の者、そこに確かに存在する恐怖<br>その多くが獣のように俊敏で、獣のように獲物を貪る</p>
           </div>
           <div id="contwrap">
             <img src="images/dkdk_4.png" alt="選択キャラクター（接敵中）" id="charaimg">
             <section>
-              <p class="tutorial_p">おっと……。こいつは実体があるタイプですね。じゃあ、折角ですし、私のスキルをお見せしちゃいます。</p>
+              <p class="tutorial_p">おっと……。こいつは実体があるタイプの怪異ですね。じゃあ、折角ですし、私のスキルをお見せしちゃいます。</p>
               <h2 class="eve_h2 ng">‐行動を選択‐</span></h2>
               <form action="tutorial.php" method="post" id="action">
                 <button type="submit" name="tutorial" value="kill" class="action_btn">撃破</button><br>
@@ -638,7 +638,7 @@ if(isset($_POST["tutorial"])):
       <script>
         const battle_ui = document.getElementById("battle_ui");
         battle_ui.style.display = "block";
-        battle_ui.style.backgroundImage = "url(images/zombie.jpg)";
+        battle_ui.style.backgroundImage = "url(images/creature.jpg)";
         const gage_now = document.getElementById("gage_now");
         gage_now.style.width = "0%";
       </script>
@@ -692,12 +692,12 @@ if(isset($_POST["tutorial"])):
         <main>
           <div id="battle_ui">
             <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
-            <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+            <p id="battle_p">異界の者、異形の者、そこに確かに存在する恐怖<br>その多くが獣のように俊敏で、獣のように獲物を貪る</p>
           </div>
           <div id="contwrap">
             <img src="images/dkdk_4.png" alt="選択キャラクター（接敵中）" id="charaimg">
             <section>
-              <p class="tutorial_p">……殲滅完了です、雑魚でしたね。他のメンバーもそれぞれのスキルを持っているので、追々見せてもらって下さい。</p>
+              <p class="tutorial_p">……殲滅完了です、雑魚でしたね。他のメンバーもそれぞれ個性的なスキルを持っているので、今度見せてもらうといいですよ。</p>
               <h2 class="eve_h2 sp">スキル発動<br><span class="eve_span">‐錆びた鉄パイプ‐</span></h2>
               <p class="eve_p">&emsp;怪異を撃破した。<br><span class="system_span">&emsp;スキル効果により、APが3減少。</span></p>
             </section>
@@ -715,7 +715,7 @@ if(isset($_POST["tutorial"])):
       <script>
         const battle_ui = document.getElementById("battle_ui");
         battle_ui.style.display = "block";
-        battle_ui.style.backgroundImage = "url(images/zombie.jpg)";
+        battle_ui.style.backgroundImage = "url(images/creature.jpg)";
         const gage_now = document.getElementById("gage_now");
         gage_now.style.width = "0%";
       </script>
@@ -842,9 +842,9 @@ if(isset($_POST["tutorial"])):
           </header>
           <main>
             <div id="contwrap">
-              <img src="images/hutu_4.png" alt="選択キャラクター" id="charaimg">
+              <img src="images/panik_4.png" alt="選択キャラクター" id="charaimg">
               <section>
-                <p class="tutorial_p">APの方が0になったら？　まあ……、生死はさておき、現実に戻っては来られないでしょうね。</p>
+                <p class="tutorial_p">APの方が0になったら？　そりゃ、まあ……生死はさておき、現実に戻っては来られないでしょうね。</p>
                 <h2 class="eve_h2 ng">‐キャラのロスト‐</span></h2>
                 <p><span class="system_span">&emsp;APが0になると、以降はそのキャラが使用不可となる。</span></p>
                 <form action="tutorial.php" method="post">
@@ -912,15 +912,15 @@ if(isset($_POST["tutorial"])):
         <div id="outro">
             <p class="asterisk">＊＊＊</p>
             <p>「お疲れさまでした。……ゴリさんの紹介なだけあって、筋がよさそうです」</p>
-            <p>　褒められているのだろうが、それどころではない。今見たもの、――異様な雰囲気の道に、明らかにこの世のものとは思えない異形。平然としている、この少女も、全て。自分の中で、受け止め切れていない。</p>
-            <p>「ああ、まあ、最初は皆、そういう反応ですよ。そのうち慣れます。慣れてほしい、慣れろ」</p>
+            <p>　褒められているのだろうが、それどころではない。今見たもの、――異様な雰囲気の道に、明らかにこの世のものとは思えない異形の生物。平然としている、この少女も、全て。自分の中で、受け止め切れていない。</p>
+            <p>「ああ、まあ、最初は皆、そういう反応ですよ。そのうち慣れます。慣れてほしい。慣れろ」</p>
             <p>　今までのアルバイトたちが続かなかった理由を、完全に理解した。無理だ。自分には。断ろう、今ここで。</p>
             <p>「もう辞めたいって顔してますねえ。この辺で、こんな楽で時給のいいバイト、そうそうないと思いますよ」</p>
             <p>　ずるい。苦学生にその言葉は効く。決心が、揺らぐ――。</p>
             <p>「他のメンバーの写メ見ます？」</p>
             <p>　こちらが何かを言うよりも早く、赤羽はスマホの液晶をこちらに向ける。――そこには、美人の女性たちが肩を寄せ合い、微笑んでいる写真が表示されていた。</p>
             <p>「明日から、よろしくお願いしますね」</p>
-            <p>　――筋がいい。その言葉を信じ、もう少し頑張ってみることにした。</p>
+            <p>　――筋がいい。その言葉を信じ、もう少しだけ頑張ってみることにした。</p>
             <a href="index.php"><img src="images/topbtn.png" alt="TOPへ戻る"></a>
           </div>
       </main>
