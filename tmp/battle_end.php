@@ -1,5 +1,5 @@
 <?php
-//バトル終了処理　　　！！！！！！！！１まとめる！
+//バトル終了処理
 //ターン加算
 if($now_recast == 0):
   $stmt = $pdo->prepare("UPDATE `user_save_tbl` SET `now_turn`=`now_turn`+1 WHERE `username`=:username");

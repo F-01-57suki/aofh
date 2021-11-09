@@ -171,7 +171,7 @@ endif;
       <main>
         <div id="battle_ui">
           <p id="battle_h"><span>諤ｪ逡ｰ</span>縺檎樟繧後∪縺励◆</p>
-          <p id="battle_p">ここになんか敵によって変わるテキスト<br>を出したいというきもちがあるよ</p>
+          <p id="battle_p"></p>
         </div>
         <script>
           if(enemy_id != 0){
