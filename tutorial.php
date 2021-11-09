@@ -758,10 +758,10 @@ if(isset($_POST["tutorial"])):
                 </p>
                 <p>
                   <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span>
-                  <span class="now_p max_p">7</span>
+                  <span class="now_p">7</span>
                   &emsp;
                   <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span>
-                  <span class="now_p">-3</span>
+                  <span class="now_p min_p">-3</span>
                 </p>
                 <p>
                 <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;発動まで&nbsp;</span><span class="now_p">3T</span>
@@ -829,10 +829,10 @@ if(isset($_POST["tutorial"])):
                 </p>
                 <p>
                   <i class="fas fa-heartbeat fa-fw"></i><span class="info_t">&nbsp;ＡＰ：</span>
-                  <span class="now_p max_p">7</span>
+                  <span class="now_p">7</span>
                   &emsp;
                   <i class="fas fa-brain fa-fw"></i><span class="info_t">&nbsp;ＳＰ：</span>
-                  <span class="now_p">-3</span>
+                  <span class="now_p min_p">-3</span>
                 </p>
                 <p>
                 <i class="fas fa-toolbox" id="skill_ng"></i><span class="info_t">&nbsp;発動まで&nbsp;</span><span class="now_p">2T</span>
