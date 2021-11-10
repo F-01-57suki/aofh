@@ -13,6 +13,7 @@ https://docs.google.com/spreadsheets/d/1BrBSshVTCp64pC4j-CoL7JSLQ-Z7XwNmtkTqi2f1
 - マップID１完成
 
 # 今後の実装予定
+- SPの下限
 - マップID2～3の実装
 - ランキング同率○位の処理について考える（今どうなってるか調査含め
 - イベントごとに発生確率を設定できるようにする
